@@ -1,0 +1,8 @@
+build
+*CACHE*
+dist
+MANIFEST
+*.pyc
+*.egg-info
+*.egg
+docs/_build/
