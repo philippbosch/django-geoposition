@@ -1,1 +1,5 @@
-include README.md
+include README.rst
+include LICENSE
+include AUTHORS
+recursive-include geoposition/templates *.html
+recursive-include geoposition/static *.css *.js
