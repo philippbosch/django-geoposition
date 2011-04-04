@@ -1,16 +1,30 @@
+from decimal import Decimal
 from django.db import models
+
+from forms import GeopositionField as GeopositionFormField
 
 
 class Geoposition(object):
     def __init__(self, latitude, longitude):
-        self.latitude = float(latitude)
-        self.longitude = float(longitude)
+        if isinstance(latitude, float) or isinstance(latitude, int):
+            latitude = str(latitude)
+        if isinstance(longitude, float) or isinstance(longitude, int):
+            longitude = str(longitude)
+        
+        self.latitude = Decimal(latitude)
+        self.longitude = Decimal(longitude)
     
     def __unicode__(self):
         return "%s,%s" % (self.latitude, self.longitude)
+    
+    def __repr__(self):
+        return "Geoposition(%s)" % unicode(self)
+    
+    def __len__(self):
+        return len(unicode(self))
 
 
-class GeopositionField(models.CharField):
+class GeopositionField(models.Field):
     description = "A geoposition (latitude and longitude)"
     __metaclass__ = models.SubfieldBase
     
@@ -19,22 +33,38 @@ class GeopositionField(models.CharField):
         super(GeopositionField, self).__init__(*args, **kwargs)
     
     def get_internal_type(self):
-        return "CharField"
+        return 'CharField'
     
     def to_python(self, value):
+        if not value:
+            value = [0,0]
         if isinstance(value, Geoposition):
             return value
+        if isinstance(value, list):
+            return Geoposition(value[0], value[1])
         
-        args = value.split(',')
-        return Geoposition(*args)
+        value_parts = value.rsplit(',')
+        try:
+            latitude = value_parts[0]
+        except IndexError:
+            latitude = '0.0'
+        try:
+            longitude = value_parts[1]
+        except IndexError:
+            longitude = '0.0'
+        
+        return Geoposition(latitude, longitude)
     
-    def get_prep_value(value):
+    def get_prep_value(self, value):
         return unicode(value)
     
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
         return self.get_db_prep_value(value)
-
-
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^geoposition\.fields\.GeopositionField"])
+    
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': GeopositionFormField
+        }
+        defaults.update(kwargs)
+        return super(GeopositionField, self).formfield(**defaults)
