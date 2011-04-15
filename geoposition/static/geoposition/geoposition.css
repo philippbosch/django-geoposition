@@ -3,3 +3,41 @@
     position: relative;
     margin: 6px 0;
 }
+
+.geoposition-address, .geoposition-search {
+    width: 50%;
+}
+
+.geoposition-address {
+    float: left;
+    text-align: left;
+}
+
+.geoposition-search {
+    float: right;
+    text-align: right;
+}
+
+.geoposition-results {
+    margin: 4px 0 0 0 !important;
+    padding: 0 !important;
+    background: white;
+    border: 1px solid #eee;
+    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.geoposition-results li {
+    list-style: none;
+    padding: 4px 8px;
+    border-top: 1px dotted #eee;
+    cursor: pointer;
+}
+
+.geoposition-results li:hover {
+    background-color: #eee;
+}
+.geoposition-results li:first-child {
+    border-top: 0;
+}
