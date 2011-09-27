@@ -53,5 +53,4 @@ EXAMPLE: If your model fields are called lat and lon, then you need to write::
 ------------
 Requirements
 ------------
-- this fork use python's json module. so Python >= 2.6
 - this fork use the jQuery.JSONParse method so jQuery >= 1.4.1 (Django 1.3 admin jQuery is ok)

@@ -3,8 +3,9 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.utils.html import conditional_escape
+import django.utils.simplejson as json
 import re
-import json
+
 
 def flat_data_att(attrs):
     """
