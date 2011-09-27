@@ -1,8 +1,9 @@
 if (jQuery != undefined) {
     var django = {
-        'jQuery':jQuery,
+        'jQuery':jQuery
     }
 }
+
 (function($) {
     
     window.geopositionMapInit = function() {
