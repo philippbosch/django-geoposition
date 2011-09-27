@@ -13,9 +13,9 @@ if (jQuery != undefined) {
         
         $('p.geoposition-widget').each(function() {
             var $container = $(this),
-                $mapContainer = $('<div class="geoposition-map" />'),
-                $addressRow = $('<div class="geoposition-address" />'),
-                $searchRow = $('<div class="geoposition-search" />'),
+                $mapContainer = $('<div class="geoposition-map"></div>'),
+                $addressRow = $('<div class="geoposition-address"></div>'),
+                $searchRow = $('<div class="geoposition-search"></div>'),
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
@@ -51,9 +51,9 @@ if (jQuery != undefined) {
                             if (results.length == 1) {
                                 updatePosition(results[0]);
                             } else {
-                                var $ul = $('<ul />', {'class': 'geoposition-results'});
+                                var $ul = $('<ul></ul>', {'class': 'geoposition-results'});
                                 $.each(results, function(i, result) {
-                                    var $li = $('<li />');
+                                    var $li = $('<li></li>');
                                     $li.text(result.formatted_address);
                                     $li.bind('click', function() {
                                         updatePosition(result);
@@ -104,7 +104,7 @@ if (jQuery != undefined) {
     };
     
     $(document).ready(function() {
-        var $script = $('<script/>');
+        var $script = $('<script></script>');
         $script.attr('src', 'http://maps.google.com/maps/api/js?sensor=false&callback=geopositionMapInit');
         $script.appendTo('body');
     });
