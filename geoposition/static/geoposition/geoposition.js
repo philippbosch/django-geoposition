@@ -17,8 +17,11 @@ if (jQuery != undefined) {
                 $addressRow = $('<div class="geoposition-address"></div>'),
                 $searchRow = $('<div class="geoposition-search"></div>'),
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search …'}),
-                $latitudeField = $container.find('input.geoposition:eq(0)'),
-                $longitudeField = $container.find('input.geoposition:eq(1)'),
+                data = $.parseJSON($container.attr('data-map-widget')), //compatible with jQuery >= 1.4.1 (django >=1.3)
+                $latitutdeRow = $(data.latitudeSelector),
+                $longitudeRow = $(data.longitudeSelector),
+                $latitudeField = $($latitutdeRow).find('input') || $latitutdeRow,
+                $longitudeField = $($longitudeRow).find('input') || $longitudeRow,
                 latitude = parseFloat($latitudeField.val()) || 0,
                 longitude = parseFloat($longitudeField.val()) || 0,
                 map,
