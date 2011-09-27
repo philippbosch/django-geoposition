@@ -74,6 +74,9 @@ if (jQuery != undefined) {
                 $(this).parent().find('ul.geoposition-results').remove();
             });
             $searchInput.appendTo($searchRow);
+            if (! $.contains($container.get(0), $latitutdeRow.get(0))){
+                $container.append($latitutdeRow, $longitudeRow);
+            }
             $container.append($mapContainer, $addressRow, $searchRow);
             
             mapLatLng = new google.maps.LatLng(latitude, longitude);
