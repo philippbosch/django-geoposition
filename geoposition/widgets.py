@@ -24,12 +24,12 @@ def flat_data_att(attrs):
 class MapWidget(forms.Widget):
     
     def __init__(self, attrs=None, mapOptions=None,
-                 latitude_selector='div[class="form-row latitude"]',
-                 longitude_selector='div[class="form-row longitude"]'):
+                 latitudeSelector='div[class="form-row latitude"]',
+                 longitudeSelector='div[class="form-row longitude"]'):
         super(MapWidget,self).__init__(attrs)
-        self.latitude_selector = latitude_selector
-        self.longitude_selector = longitude_selector
-        self.mapOptions = mapOptions or {}
+        self.latitude_selector = latitudeSelector
+        self.longitude_selector = longitudeSelector
+        self.map_options = mapOptions or {}
     
     def render(self, name, value, attrs=None):
         final_attrs = self.build_attrs(attrs)
@@ -37,7 +37,7 @@ class MapWidget(forms.Widget):
         final_attrs['data-map-widget'] = {
             'latitudeSelector': self.latitude_selector,
             'longitudeSelector': self.longitude_selector,
-            'mapOptions': self.mapOptions,
+            'mapOptions': self.map_options,
         }
         return mark_safe(u'<p%s></p>' % flat_data_att(final_attrs))
     
@@ -54,7 +54,7 @@ class GeopositionWidget(forms.MultiWidget):
             forms.TextInput(),
         )
         super(GeopositionWidget, self).__init__(widgets, attrs)
-        self.mapOptions = mapOptions or {}
+        self.map_options = mapOptions or {}
     
     def decompress(self, value):
         if value:
@@ -65,7 +65,7 @@ class GeopositionWidget(forms.MultiWidget):
         attributes = { 'data-map-widget':{
             'latitudeSelector': '#' + re.search('id="([^"]+)"',rendered_widgets[0]).group(1),
             'longitudeSelector': '#' + re.search('id="([^"]+)"',rendered_widgets[1]).group(1),
-            'mapOptions': self.mapOptions,
+            'mapOptions': self.map_options,
         }}
         return render_to_string('geoposition/widgets/geoposition.html', {
             'attributes': mark_safe(flat_data_att(attributes)),
