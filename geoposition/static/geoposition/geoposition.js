@@ -75,7 +75,7 @@ if (jQuery != undefined) {
             mapLatLng = new google.maps.LatLng(latitude, longitude);
             mapOptions = $.extend({}, mapDefaults, {
                 'center': mapLatLng,
-                'zoom': latitude && longitude ? 15 : 1
+                'zoom': latitude || longitude ? 15 : 1
             });
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             marker = new google.maps.Marker({
