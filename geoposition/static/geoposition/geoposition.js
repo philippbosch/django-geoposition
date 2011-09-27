@@ -11,7 +11,7 @@ if (jQuery != undefined) {
             'mapTypeId': google.maps.MapTypeId.ROADMAP
         };
         
-        $('p.geoposition-widget').each(function() {
+        $('p[data-map-widget]').each(function() {
             var $container = $(this),
                 $mapContainer = $('<div class="geoposition-map"></div>'),
                 $addressRow = $('<div class="geoposition-address"></div>'),
