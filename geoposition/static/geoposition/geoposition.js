@@ -26,6 +26,7 @@ if (jQuery != undefined) {
                 longitude = parseFloat($longitudeField.val()) || 0,
                 map,
                 mapLatLng,
+                mapDefault = $.extend({}, mapDefaults, data.mapOptions),
                 mapOptions,
                 marker;
             
@@ -76,7 +77,7 @@ if (jQuery != undefined) {
             $container.append($mapContainer, $addressRow, $searchRow);
             
             mapLatLng = new google.maps.LatLng(latitude, longitude);
-            mapOptions = $.extend({}, mapDefaults, {
+            mapOptions = $.extend({}, mapDefault, {
                 'center': mapLatLng,
                 'zoom': latitude || longitude ? 15 : 1
             });
