@@ -91,12 +91,9 @@ if (jQuery != undefined) {
                 'draggable': true,
                 'animation': google.maps.Animation.DROP
             });
-            google.maps.event.addListener(marker, 'dragend', function() {
-                $latitudeField.val(this.position.lat());
-                $longitudeField.val(this.position.lng());
-                
-                var gc = new google.maps.Geocoder();
-                gc.geocode({
+            var gc = new google.maps.Geocoder();
+            var geocode = function(geocoder, marker){
+                geocoder.geocode({
                     'latLng': marker.position
                 }, function(results, status) {
                     $addressRow.text('');
@@ -104,8 +101,13 @@ if (jQuery != undefined) {
                         $addressRow.text(results[0].formatted_address);
                     }
                 });
+            };
+            google.maps.event.addListener(marker, 'dragend', function() {
+                $latitudeField.val(this.position.lat());
+                $longitudeField.val(this.position.lng());
+                geocode(gc, marker)
             });
-            google.maps.event.trigger(marker, 'dragend');
+            geocode(gc, marker);
         });
         
     };
