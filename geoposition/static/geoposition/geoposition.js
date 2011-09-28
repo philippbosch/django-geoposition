@@ -18,9 +18,9 @@ if (jQuery != undefined) {
                 $searchRow = $('<div class="geoposition-search"></div>'),
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search …'}),
                 data = $.parseJSON($container.attr('data-map-widget')), //compatible with jQuery >= 1.4.1 (django >=1.3)
-                $latitutdeRow = $(data.latitudeSelector),
+                $latitudeRow = $(data.latitudeSelector),
                 $longitudeRow = $(data.longitudeSelector),
-                $latitudeField = $($latitutdeRow).find('input') || $latitutdeRow,
+                $latitudeField = $($latitudeRow).find('input') || $latitudeRow,
                 $longitudeField = $($longitudeRow).find('input') || $longitudeRow,
                 latitude = parseFloat($latitudeField.val()) || 0,
                 longitude = parseFloat($longitudeField.val()) || 0,
@@ -74,8 +74,8 @@ if (jQuery != undefined) {
                 $(this).parent().find('ul.geoposition-results').remove();
             });
             $searchInput.appendTo($searchRow);
-            if (! $.contains($container.get(0), $latitutdeRow.get(0))){
-                $container.append($latitutdeRow, $longitudeRow);
+            if (! $.contains($container.get(0), $latitudeRow.get(0))){
+                $container.append($latitudeRow, $longitudeRow);
             }
             $container.append($mapContainer, $addressRow, $searchRow);
             
