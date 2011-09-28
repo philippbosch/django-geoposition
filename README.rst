@@ -23,7 +23,7 @@ Alternatively if you don't want to use a GeopositionField in your model, you can
 
 This will reuse the latitude and longitude field from your model and the generated HTML will be::
 
-    <p id="id_map" data-map-widget='{"mapOptions": {"scrollwheel": false}, "longitudeSelector": "div[class=\"form-row longitude\"]", "latitudeSelector": "div[class=\"form-row latitude\"]"}'></p>
+    <p id="id_map" data-map-widget='{"mapOptions": {"scrollwheel": false}, "longitudeSelector": "div[class^=\"form-row\"][class~=\"longitude\"]", "latitudeSelector": "div[class^=\"form-row\"][class~=\"latitude\"]"}'></p>
 
 
 
@@ -46,8 +46,8 @@ EXAMPLE: If your model fields are called lat and lon, then you need to write::
         mapOptions={
             'scrollwheel': False,
         },
-        latitudeSelector='div[class="form-row lat"]',
-        longitudeSelector='div[class="form-row lon"]',
+        latitudeSelector='div[class^="form-row"][class~="lat"]',
+        longitudeSelector='div[class^="form-row"][class~="lon"]',
         ), required=False)
 
 ------------
