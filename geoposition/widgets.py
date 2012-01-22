@@ -25,8 +25,8 @@ def flat_data_att(attrs):
 class MapWidget(forms.Widget):
     
     def __init__(self, attrs=None, mapOptions=None,
-                 latitudeSelector='div[class^="form-row"][class~="latitude"]',
-                 longitudeSelector='div[class^="form-row"][class~="longitude"]'):
+                 latitudeSelector='div[class^="form-row"][class*="latitude"]',
+                 longitudeSelector='div[class^="form-row"][class*="longitude"]'):
         super(MapWidget,self).__init__(attrs)
         self.latitude_selector = latitudeSelector
         self.longitude_selector = longitudeSelector
