@@ -1,7 +1,8 @@
-if (jQuery != undefined) {
+/*global google*/
+if (jQuery !== undefined) {
     var django = {
         'jQuery':jQuery
-    }
+    };
 }
 
 (function($) {
@@ -16,7 +17,7 @@ if (jQuery != undefined) {
                 $mapContainer = $('<div class="geoposition-map"></div>'),
                 $addressRow = $('<div class="geoposition-address"></div>'),
                 $searchRow = $('<div class="geoposition-search"></div>'),
-                $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search …'}),
+                $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search \u2026'}),
                 data = $.parseJSON($container.attr('data-map-widget')), //compatible with jQuery >= 1.4.1 (django >=1.3)
                 $latitudeRow = $(data.latitudeSelector),
                 $longitudeRow = $(data.longitudeSelector),
@@ -32,7 +33,7 @@ if (jQuery != undefined) {
             
             
             $searchInput.bind('keydown', function(e) {
-                if (e.keyCode == 13) {
+                if (e.keyCode === 13) {
                     e.preventDefault();
                     var $input = $(this),
                         gc = new google.maps.Geocoder();
@@ -40,7 +41,7 @@ if (jQuery != undefined) {
                     gc.geocode({
                         'address': $(this).val()
                     }, function(results, status) {
-                        if (status == 'OK') {
+                        if (status === 'OK') {
                             var updatePosition = function(result) {
                                 if (result.geometry.bounds) {
                                     map.fitBounds(result.geometry.bounds);
@@ -52,7 +53,7 @@ if (jQuery != undefined) {
                                 google.maps.event.trigger(marker, 'dragend');
                             };
                             
-                            if (results.length == 1) {
+                            if (results.length === 1) {
                                 updatePosition(results[0]);
                             } else {
                                 var $ul = $('<ul></ul>', {'class': 'geoposition-results'});
@@ -105,7 +106,7 @@ if (jQuery != undefined) {
             google.maps.event.addListener(marker, 'dragend', function() {
                 $latitudeField.val(this.position.lat());
                 $longitudeField.val(this.position.lng());
-                geocode(gc, marker)
+                geocode(gc, marker);
             });
             geocode(gc, marker);
         });
