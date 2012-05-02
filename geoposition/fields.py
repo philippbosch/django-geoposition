@@ -2,6 +2,7 @@ from django.db import models
 
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
+from django.utils.encoding import smart_unicode
 
 
 class GeopositionField(models.Field):
@@ -40,7 +41,7 @@ class GeopositionField(models.Field):
     
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
-        return self.get_db_prep_value(value)
+        return smart_unicode(value)
     
     def formfield(self, **kwargs):
         defaults = {
