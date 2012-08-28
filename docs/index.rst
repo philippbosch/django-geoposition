@@ -50,15 +50,37 @@ it:
 Form field and widget
 ---------------------
 
-If you use a ``GeopositionField`` in a form (e.g. in the admin) it
-will automatically show a `Google Maps`_ widget with a marker at the
-currently stored position. You can drag and drop the marker with the
-mouse and the corresponding latitude and longitude fields will be
-updated accordingly.
+Admin
+^^^^^
+
+If you use a ``GeopositionField`` in the admin it will automatically 
+show a `Google Maps`_ widget with a marker at the currently stored 
+position. You can drag and drop the marker with the mouse and the 
+corresponding latitude and longitude fields will be updated 
+accordingly.
 
 It looks like this:
 
 |geoposition-widget-admin|
+
+
+Regular Forms
+^^^^^^^^^^^^^
+
+Using the map widget on a regular form outside of the admin requires
+just a little more work. In your template make sure that
+
+- `jQuery`_ is included
+- the static files (JS, CSS) of the map widget are included (just use 
+  ``{{ form.media }}``)
+
+**Example**::
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <form method="POST" action="">{% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+    </form>
 
 
 Settings
@@ -75,3 +97,4 @@ At the moment there are no settings, but I should propably add some …
 .. _django-staticfiles: http://github.com/jezdez/django-staticfiles
 .. _Google Maps: http://code.google.com/apis/maps/documentation/javascript/
 .. |geoposition-widget-admin| image:: images/geoposition-widget-admin.jpg
+.. _jQuery: http://jquery.com
