@@ -84,8 +84,8 @@ if (typeof django == 'undefined' && typeof jQuery != 'undefined') {
                 'animation': google.maps.Animation.DROP
             });
             google.maps.event.addListener(marker, 'dragend', function() {
-                $latitudeField.val(this.position.lat());
-                $longitudeField.val(this.position.lng());
+                $latitudeField.val(this.position.lat() || '');
+                $longitudeField.val(this.position.lng() || '');
                 
                 var gc = new google.maps.Geocoder();
                 gc.geocode({
