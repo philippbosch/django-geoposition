@@ -1,7 +1,7 @@
-if (jQuery != undefined) {
+if (typeof django == 'undefined' && typeof jQuery != 'undefined') {
     var django = {
-        'jQuery':jQuery,
-    }
+        'jQuery': jQuery
+    };
 }
 (function($) {
     
