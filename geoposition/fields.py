@@ -18,7 +18,7 @@ class GeopositionField(models.Field):
     
     def to_python(self, value):
         if not value:
-            value = [0,0]
+            return None
         if isinstance(value, Geoposition):
             return value
         if isinstance(value, list):
@@ -28,11 +28,11 @@ class GeopositionField(models.Field):
         try:
             latitude = value_parts[0]
         except IndexError:
-            latitude = '0.0'
+            return None
         try:
             longitude = value_parts[1]
         except IndexError:
-            longitude = '0.0'
+            return None
         
         return Geoposition(latitude, longitude)
     
