@@ -21,7 +21,7 @@ class GeopositionField(models.Field):
             return None
         if isinstance(value, Geoposition):
             return value
-        if isinstance(value, list):
+        if isinstance(value, list) or isinstance(value, tuple):
             return Geoposition(value[0], value[1])
         
         value_parts = value.rsplit(',')
