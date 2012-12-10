@@ -12,7 +12,13 @@ class GeopositionWidget(forms.MultiWidget):
     
     def decompress(self, value):
         if value:
-            return [value.latitude, value.longitude]
+            try:
+                return [value.latitude, value.longitude]
+            except AttributeError:
+                # Value is not Geoposition instance
+                # try to split it by comma
+                value = str(value)
+                return value.split(',')
         return [None,None]
     
     def format_output(self, rendered_widgets):
