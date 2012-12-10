@@ -9,12 +9,16 @@ class GeopositionField(forms.MultiValueField):
     }
     
     def __init__(self, *args, **kwargs):
-        self.widget = GeopositionWidget()
-        fields = (
-            forms.DecimalField(label=_('latitude')),
-            forms.DecimalField(label=_('longitude')),
-        )
-        super(GeopositionField, self).__init__(fields, required=False)
+        kwargs.pop('initial', None)  # Do not send initial value
+                                     # It can caouse problems
+        kwargs.update({
+            'widget': GeopositionWidget(),
+            'fields': (
+                forms.DecimalField(label=_('latitude')),
+                forms.DecimalField(label=_('longitude')),
+            )
+        })
+        super(GeopositionField, self).__init__(**kwargs)
     
     def widget_attrs(self, widget):
         classes = widget.attrs.get('class', '').split()
