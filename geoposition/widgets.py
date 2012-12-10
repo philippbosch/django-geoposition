@@ -2,6 +2,7 @@ from django import forms
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+
 class GeopositionWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         widgets = (
@@ -9,7 +10,7 @@ class GeopositionWidget(forms.MultiWidget):
             forms.TextInput(),
         )
         super(GeopositionWidget, self).__init__(widgets, attrs)
-    
+
     def decompress(self, value):
         if value:
             try:
@@ -19,8 +20,8 @@ class GeopositionWidget(forms.MultiWidget):
                 # try to split it by comma
                 value = str(value)
                 return value.split(',')
-        return [None,None]
-    
+        return [None, None]
+
     def format_output(self, rendered_widgets):
         return render_to_string('geoposition/widgets/geoposition.html', {
             'latitude': {
@@ -32,7 +33,7 @@ class GeopositionWidget(forms.MultiWidget):
                 'label': _("longitude"),
             },
         })
-    
+
     class Media:
         js = ('geoposition/geoposition.js',)
         css = {
