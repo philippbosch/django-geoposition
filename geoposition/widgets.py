@@ -4,7 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class GeopositionWidget(forms.MultiWidget):
-    def __init__(self, attrs=None):
+    def __init__(self, attrs=None, template=None):
+        default_template = 'geoposition/widgets/geoposition.html'
+        self.template = template or default_template
+
         widgets = (
             forms.TextInput(),
             forms.TextInput(),
@@ -23,7 +26,7 @@ class GeopositionWidget(forms.MultiWidget):
         return [None, None]
 
     def format_output(self, rendered_widgets):
-        return render_to_string('geoposition/widgets/geoposition.html', {
+        return render_to_string(self.template, {
             'latitude': {
                 'html': rendered_widgets[0],
                 'label': _("latitude"),
