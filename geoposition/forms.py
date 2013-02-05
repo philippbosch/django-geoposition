@@ -10,8 +10,6 @@ class GeopositionField(forms.MultiValueField):
     }
 
     def __init__(self, *args, **kwargs):
-        kwargs.pop('initial', None)  # Do not send initial value
-                                     # It can caouse problems
         kwargs.update({
             'widget': GeopositionWidget(),
             'fields': (
