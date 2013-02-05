@@ -1,8 +1,9 @@
-if (jQuery != undefined) {
+if (jQuery !== undefined) {
     var django = {
-        'jQuery':jQuery,
-    }
+        'jQuery': jQuery
+    };
 }
+
 (function($) {
 
     window.geopositionMapInit = function() {
@@ -18,7 +19,7 @@ if (jQuery != undefined) {
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
-                defaultZoom = $container.attr('default-zoom'),
+                defaultZoom = parseInt($container.attr('data-default-zoom'), 10) || null,
                 latitude = parseFloat($latitudeField.val()) || 0,
                 longitude = parseFloat($longitudeField.val()) || 0,
                 map,
@@ -75,7 +76,7 @@ if (jQuery != undefined) {
             mapLatLng = new google.maps.LatLng(latitude, longitude);
             mapOptions = $.extend({}, mapDefaults, {
                 'center': mapLatLng,
-                'zoom': defaultZoom ? 8 : 15
+                'zoom': defaultZoom || 15
             });
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             marker = new google.maps.Marker({
