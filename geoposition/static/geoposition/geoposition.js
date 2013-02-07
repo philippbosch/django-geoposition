@@ -99,7 +99,7 @@ if (jQuery !== undefined) {
                     }
                 });
             });
-            google.maps.event.trigger(marker, 'dragend');
+            // google.maps.event.trigger(marker, 'dragend');
         });
 
     };

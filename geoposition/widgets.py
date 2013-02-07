@@ -31,7 +31,7 @@ class GeopositionWidget(forms.MultiWidget):
 
     def format_output(self, rendered_widgets):
         context = {
-            'initial': self.initial,
+            'initial': self.initial if hasattr(self, 'initial') else None,
             'latitude': {
                 'html': rendered_widgets[0],
                 'label': _("latitude"),
