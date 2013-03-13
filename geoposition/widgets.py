@@ -2,6 +2,9 @@ from django import forms
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+from .conf import settings
+
+
 class GeopositionWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         widgets = (
@@ -24,6 +27,11 @@ class GeopositionWidget(forms.MultiWidget):
             'longitude': {
                 'html': rendered_widgets[1],
                 'label': _("longitude"),
+            },
+            'settings': {
+                'zoom': settings.GEOPOSITION_DEFAULT_ZOOM,
+                'lat': settings.GEOPOSITION_DEFAULT_CENTRE[0],
+                'long': settings.GEOPOSITION_DEFAULT_CENTRE[1],
             },
         })
     

@@ -18,8 +18,9 @@ if (jQuery != undefined) {
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
-                latitude = parseFloat($latitudeField.val()) || 0,
-                longitude = parseFloat($longitudeField.val()) || 0,
+                latitude = parseFloat($latitudeField.val()) || $container.data('lat'),
+                longitude = parseFloat($longitudeField.val()) || $container.data('long'),
+                zoom = $container.data('zoom'),
                 map,
                 mapLatLng,
                 mapOptions,
@@ -74,7 +75,7 @@ if (jQuery != undefined) {
             mapLatLng = new google.maps.LatLng(latitude, longitude);
             mapOptions = $.extend({}, mapDefaults, {
                 'center': mapLatLng,
-                'zoom': latitude && longitude ? 15 : 1
+                'zoom': latitude && longitude ? zoom : 1
             });
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             marker = new google.maps.Marker({
