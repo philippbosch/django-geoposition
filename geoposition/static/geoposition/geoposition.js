@@ -1,15 +1,16 @@
-if (jQuery != undefined) {
+if (jQuery !== undefined) {
     var django = {
-        'jQuery':jQuery,
-    }
+        'jQuery': jQuery
+    };
 }
+
 (function($) {
-    
+
     window.geopositionMapInit = function() {
         var mapDefaults = {
             'mapTypeId': google.maps.MapTypeId.ROADMAP
         };
-        
+
         $('p.geoposition-widget').each(function() {
             var $container = $(this),
                 $mapContainer = $('<div class="geoposition-map" />'),
@@ -18,14 +19,15 @@ if (jQuery != undefined) {
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Search …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
+                defaultZoom = parseInt($container.attr('data-default-zoom'), 10) || null,
                 latitude = parseFloat($latitudeField.val()) || 0,
                 longitude = parseFloat($longitudeField.val()) || 0,
                 map,
                 mapLatLng,
                 mapOptions,
                 marker;
-            
-            
+
+
             $searchInput.bind('keydown', function(e) {
                 if (e.keyCode == 13) {
                     e.preventDefault();
@@ -46,7 +48,7 @@ if (jQuery != undefined) {
                                 marker.setPosition(result.geometry.location);
                                 google.maps.event.trigger(marker, 'dragend');
                             };
-                            
+
                             if (results.length == 1) {
                                 updatePosition(results[0]);
                             } else {
@@ -70,11 +72,11 @@ if (jQuery != undefined) {
             });
             $searchInput.appendTo($searchRow);
             $container.append($mapContainer, $addressRow, $searchRow);
-            
+
             mapLatLng = new google.maps.LatLng(latitude, longitude);
             mapOptions = $.extend({}, mapDefaults, {
                 'center': mapLatLng,
-                'zoom': latitude && longitude ? 15 : 1
+                'zoom': defaultZoom || 15
             });
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             marker = new google.maps.Marker({
@@ -86,7 +88,7 @@ if (jQuery != undefined) {
             google.maps.event.addListener(marker, 'dragend', function() {
                 $latitudeField.val(this.position.lat());
                 $longitudeField.val(this.position.lng());
-                
+
                 var gc = new google.maps.Geocoder();
                 gc.geocode({
                     'latLng': marker.position
@@ -97,11 +99,11 @@ if (jQuery != undefined) {
                     }
                 });
             });
-            google.maps.event.trigger(marker, 'dragend');
+            // google.maps.event.trigger(marker, 'dragend');
         });
-        
+
     };
-    
+
     $(document).ready(function() {
         var $script = $('<script/>');
         $script.attr('src', 'https://maps.google.com/maps/api/js?sensor=false&callback=geopositionMapInit');
