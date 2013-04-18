@@ -14,7 +14,8 @@ class GeopositionField(forms.MultiValueField):
             forms.DecimalField(label=_('latitude')),
             forms.DecimalField(label=_('longitude')),
         )
-        super(GeopositionField, self).__init__(fields, required=False)
+        kwargs['required'] = False
+        super(GeopositionField, self).__init__(fields, *args, **kwargs)
     
     def widget_attrs(self, widget):
         classes = widget.attrs.get('class', '').split()
