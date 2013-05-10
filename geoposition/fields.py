@@ -49,3 +49,9 @@ class GeopositionField(models.Field):
         }
         defaults.update(kwargs)
         return super(GeopositionField, self).formfield(**defaults)
+        
+try:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([], ["^geoposition\.fields\.GeopositionField"])
+except ImportError:
+    pass
