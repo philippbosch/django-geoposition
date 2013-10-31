@@ -51,4 +51,6 @@ class GeopositionField(models.Field):
             'form_class': GeopositionFormField
         }
         defaults.update(kwargs)
+        if not 'initial' in defaults or defaults['initial'] is None:
+            defaults['initial'] = '0,0'
         return super(GeopositionField, self).formfield(**defaults)

@@ -4,12 +4,13 @@ if (jQuery != undefined) {
     }
 }
 (function($) {
-    
+
     window.geopositionMapInit = function() {
         var mapDefaults = {
-            'mapTypeId': google.maps.MapTypeId.ROADMAP
+            'mapTypeId': google.maps.MapTypeId.ROADMAP,
+            'scrollwheel': false
         };
-        
+
         $('p.geoposition-widget').each(function() {
             var $container = $(this),
                 $mapContainer = $('<div class="geoposition-map" />'),
@@ -24,8 +25,8 @@ if (jQuery != undefined) {
                 mapLatLng,
                 mapOptions,
                 marker;
-            
-            
+
+
             $searchInput.bind('keydown', function(e) {
                 if (e.keyCode == 13) {
                     e.preventDefault();
@@ -46,7 +47,7 @@ if (jQuery != undefined) {
                                 marker.setPosition(result.geometry.location);
                                 google.maps.event.trigger(marker, 'dragend');
                             };
-                            
+
                             if (results.length == 1) {
                                 updatePosition(results[0]);
                             } else {
@@ -70,7 +71,7 @@ if (jQuery != undefined) {
             });
             $searchInput.appendTo($searchRow);
             $container.append($mapContainer, $addressRow, $searchRow);
-            
+
             mapLatLng = new google.maps.LatLng(latitude, longitude);
             mapOptions = $.extend({}, mapDefaults, {
                 'center': mapLatLng,
@@ -86,7 +87,7 @@ if (jQuery != undefined) {
             google.maps.event.addListener(marker, 'dragend', function() {
                 $latitudeField.val(this.position.lat());
                 $longitudeField.val(this.position.lng());
-                
+
                 var gc = new google.maps.Geocoder();
                 gc.geocode({
                     'latLng': marker.position
@@ -99,9 +100,9 @@ if (jQuery != undefined) {
             });
             google.maps.event.trigger(marker, 'dragend');
         });
-        
+
     };
-    
+
     $(document).ready(function() {
         var $script = $('<script/>');
         $script.attr('src', 'https://maps.google.com/maps/api/js?sensor=false&callback=geopositionMapInit');
