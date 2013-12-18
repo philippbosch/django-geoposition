@@ -1,5 +1,8 @@
+from __future__ import unicode_literals
+
 from django import forms
 from django.template.loader import render_to_string
+from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 
 class GeopositionWidget(forms.MultiWidget):
@@ -9,12 +12,14 @@ class GeopositionWidget(forms.MultiWidget):
             forms.TextInput(),
         )
         super(GeopositionWidget, self).__init__(widgets, attrs)
-    
+
     def decompress(self, value):
+        if isinstance(value, six.text_type):
+            return value.rsplit(',')
         if value:
             return [value.latitude, value.longitude]
         return [None,None]
-    
+
     def format_output(self, rendered_widgets):
         return render_to_string('geoposition/widgets/geoposition.html', {
             'latitude': {
@@ -26,7 +31,7 @@ class GeopositionWidget(forms.MultiWidget):
                 'label': _("longitude"),
             },
         })
-    
+
     class Media:
         js = ('geoposition/geoposition.js',)
         css = {
