@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-VERSION = (0, 1, 5)
+VERSION = (0, 1, 6, 'pre')
 __version__ = '.'.join(map(str, VERSION))
 
 
@@ -22,3 +22,9 @@ class Geoposition(object):
 
     def __len__(self):
         return len(unicode(self))
+
+    def __eq__(self, other):
+        return self.latitude == other.latitude and self.longitude == other.longitude
+
+    def __ne__(self, other):
+        return self.latitude != other.latitude or self.longitude != other.longitude

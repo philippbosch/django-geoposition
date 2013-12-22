@@ -9,7 +9,7 @@ setup(
     url='http://github.com/philippbosch/django-geoposition',
     packages=find_packages(),
     zip_safe=False,
-    package_data = {
+    package_data={
         'geoposition': [
             'locale/*/LC_MESSAGES/*',
             'templates/geoposition/widgets/*.html',
