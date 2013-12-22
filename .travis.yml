@@ -5,13 +5,13 @@ python:
   - 3.2
   - 3.3
 env:
-  - DJANGO=1.4
-  - DJANGO=1.4.7
+  - DJANGO=1.4.10
   - DJANGO=1.5
   - DJANGO=1.5.5
+  - DJANGO=1.6
   - DJANGO=1.6.1
 install:
   - pip install -q Django==$DJANGO --use-mirrors
-  - pip install .
+  - pip install . --use-mirrors
 script:
   - python example/manage.py test geoposition
