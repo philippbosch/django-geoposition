@@ -14,4 +14,4 @@ install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install . --use-mirrors
 script:
-  - python example/manage.py test geoposition
+  - python manage.py test geoposition
