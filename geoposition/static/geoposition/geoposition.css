@@ -5,7 +5,11 @@
 }
 
 .geoposition-address, .geoposition-search {
-    width: 50%;
+    width: 30%;
+}
+
+.geoposition-search input {
+    width: 100%;
 }
 
 .geoposition-address {
@@ -15,10 +19,12 @@
 
 .geoposition-search {
     float: right;
-    text-align: right;
+    text-align: left;
 }
 
 .geoposition-results {
+    position: absolute;
+    z-index: 1;
     margin: 4px 0 0 0 !important;
     padding: 0 !important;
     background: white;
