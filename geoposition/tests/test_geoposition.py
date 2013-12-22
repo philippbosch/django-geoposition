@@ -14,11 +14,6 @@ class GeopositionTestCase(SimpleTestCase):
         self.assertEqual(gp.latitude, Decimal('52.5'))
         self.assertEqual(gp.longitude, Decimal('13.4'))
 
-    def test_init_with_unicodes(self):
-        gp = Geoposition(u'52.5', u'13.4')
-        self.assertEqual(gp.latitude, Decimal('52.5'))
-        self.assertEqual(gp.longitude, Decimal('13.4'))
-
     def test_init_with_floats(self):
         gp = Geoposition(52.5, 13.4)
         self.assertEqual(gp.latitude, Decimal('52.5'))
