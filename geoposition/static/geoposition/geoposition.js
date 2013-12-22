@@ -105,7 +105,7 @@ if (jQuery != undefined) {
 
     $(document).ready(function() {
         var $script = $('<script/>');
-        $script.attr('src', 'https://maps.google.com/maps/api/js?sensor=false&callback=geopositionMapInit');
+        $script.attr('src', '//maps.google.com/maps/api/js?sensor=false&callback=geopositionMapInit');
         $script.appendTo('body');
     });
 })(django.jQuery);
