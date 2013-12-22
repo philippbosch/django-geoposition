@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from decimal import Decimal
 
 VERSION = (0, 1, 6, 'pre')
@@ -14,14 +16,14 @@ class Geoposition(object):
         self.latitude = Decimal(latitude)
         self.longitude = Decimal(longitude)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s,%s" % (self.latitude, self.longitude)
 
     def __repr__(self):
-        return "Geoposition(%s)" % unicode(self)
+        return "Geoposition(%s)" % str(self)
 
     def __len__(self):
-        return len(unicode(self))
+        return len(str(self))
 
     def __eq__(self, other):
         return self.latitude == other.latitude and self.longitude == other.longitude
