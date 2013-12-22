@@ -1,12 +1,13 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import smart_unicode
 
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
-from django.utils.encoding import smart_unicode
 
 
 class GeopositionField(models.Field):
-    description = "A geoposition (latitude and longitude)"
+    description = _("A geoposition (latitude and longitude)")
     __metaclass__ = models.SubfieldBase
 
     def __init__(self, *args, **kwargs):
