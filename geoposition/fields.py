@@ -14,16 +14,14 @@ class GeopositionField(models.Field):
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 42
-        if not 'default' in kwargs:
-            kwargs['default'] = "0,0"
         super(GeopositionField, self).__init__(*args, **kwargs)
 
     def get_internal_type(self):
         return 'CharField'
 
     def to_python(self, value):
-        if not value:
-            return Geoposition(0, 0)
+        if not value or value == 'None':
+            return None
         if isinstance(value, Geoposition):
             return value
         if isinstance(value, list):
@@ -54,6 +52,4 @@ class GeopositionField(models.Field):
             'form_class': GeopositionFormField
         }
         defaults.update(kwargs)
-        if not 'initial' in defaults or defaults['initial'] is None:
-            defaults['initial'] = '0,0'
         return super(GeopositionField, self).formfield(**defaults)

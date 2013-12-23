@@ -113,7 +113,9 @@ if (jQuery != undefined) {
                     }
                 });
             });
-            google.maps.event.trigger(marker, 'dragend');
+            if ($latitudeField.val() && $longitudeField.val()) {
+                google.maps.event.trigger(marker, 'dragend');
+            }
         });
     });
 })(django.jQuery);
