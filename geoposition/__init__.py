@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from decimal import Decimal
 
-VERSION = (0, 1, 6, 'pre')
+VERSION = (0, 2, 0, 'pre')
 __version__ = '.'.join(map(str, VERSION))
 
 
