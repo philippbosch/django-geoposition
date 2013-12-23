@@ -4,6 +4,8 @@ django-geoposition
 
 A model field that can hold a geoposition (latitude/longitude), and corresponding admin/form widget.
 
+.. image:: https://travis-ci.org/philippbosch/django-geoposition.png?branch=master   
+   :target: https://travis-ci.org/philippbosch/django-geoposition
 
 Prerequisites
 -------------
