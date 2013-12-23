@@ -125,6 +125,7 @@ if (jQuery != undefined) {
                 var longitude = parseFloat($longitudeField.val()) || 0;
                 var center = new google.maps.LatLng(latitude, longitude);
                 map.setCenter(center);
+                map.setZoom(15);
                 marker.setPosition(center);
                 doGeocode();
             });

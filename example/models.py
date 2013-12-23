@@ -7,7 +7,7 @@ class PointOfInterest(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=50)
     zipcode = models.CharField(max_length=10)
-    position = GeopositionField()
+    position = GeopositionField(blank=True)
 
     class Meta:
         verbose_name_plural = 'points of interest'
