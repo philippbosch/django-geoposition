@@ -51,7 +51,7 @@ if (jQuery != undefined) {
                             $.each(results, function(i, result) {
                                 var $li = $('<li />');
                                 $li.text(result.formatted_address);
-                                $li.bind('click', function() {
+                                $li.on('click', function() {
                                     updatePosition(result);
                                     $li.closest('ul').remove();
                                 });
@@ -63,8 +63,20 @@ if (jQuery != undefined) {
                 });
             }
 
+            function doGeocode() {
+                var gc = new google.maps.Geocoder();
+                gc.geocode({
+                    'latLng': marker.position
+                }, function(results, status) {
+                    $addressRow.text('');
+                    if (results && results[0]) {
+                        $addressRow.text(results[0].formatted_address);
+                    }
+                });
+            }
+
             var autoSuggestTimer = null;
-            $searchInput.bind('keydown', function(e) {
+            $searchInput.on('keydown', function(e) {
                 if (autoSuggestTimer) {
                     clearTimeout(autoSuggestTimer);
                     autoSuggestTimer = null;
@@ -81,7 +93,7 @@ if (jQuery != undefined) {
                         doSearch();
                     }, 1000);
                 }
-            }).bind('abort', function() {
+            }).on('abort', function() {
                 $(this).parent().find('ul.geoposition-results').remove();
             });
             $searchInput.appendTo($searchRow);
@@ -102,20 +114,20 @@ if (jQuery != undefined) {
             google.maps.event.addListener(marker, 'dragend', function() {
                 $latitudeField.val(this.position.lat());
                 $longitudeField.val(this.position.lng());
-
-                var gc = new google.maps.Geocoder();
-                gc.geocode({
-                    'latLng': marker.position
-                }, function(results, status) {
-                    $addressRow.text('');
-                    if (results[0]) {
-                        $addressRow.text(results[0].formatted_address);
-                    }
-                });
+                doGeocode();
             });
             if ($latitudeField.val() && $longitudeField.val()) {
                 google.maps.event.trigger(marker, 'dragend');
             }
+
+            $latitudeField.add($longitudeField).on('keyup', function(e) {
+                var latitude = parseFloat($latitudeField.val()) || 0;
+                var longitude = parseFloat($longitudeField.val()) || 0;
+                var center = new google.maps.LatLng(latitude, longitude);
+                map.setCenter(center);
+                marker.setPosition(center);
+                doGeocode();
+            });
         });
     });
 })(django.jQuery);
