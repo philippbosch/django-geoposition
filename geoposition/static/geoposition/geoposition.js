@@ -1,11 +1,11 @@
 if (jQuery != undefined) {
     var django = {
-        'jQuery':jQuery,
+        'jQuery': jQuery,
     }
 }
-(function($) {
 
-    window.geopositionMapInit = function() {
+(function($) {
+    $(document).ready(function() {
         var mapDefaults = {
             'mapTypeId': google.maps.MapTypeId.ROADMAP,
             'scrollwheel': false
@@ -115,12 +115,5 @@ if (jQuery != undefined) {
             });
             google.maps.event.trigger(marker, 'dragend');
         });
-
-    };
-
-    $(document).ready(function() {
-        var $script = $('<script/>');
-        $script.attr('src', '//maps.google.com/maps/api/js?sensor=false&callback=geopositionMapInit');
-        $script.appendTo('body');
     });
 })(django.jQuery);
