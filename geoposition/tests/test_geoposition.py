@@ -36,3 +36,13 @@ class GeopositionTestCase(SimpleTestCase):
         gp1 = Geoposition(52.5, 13.4)
         gp2 = Geoposition(52.4, 13.1)
         self.assertNotEqual(gp1, gp2)
+
+    def test_equality_with_none(self):
+        gp1 = Geoposition(52.5, 13.4)
+        gp2 = None
+        self.assertFalse(gp1 == gp2)
+
+    def test_inequality_with_none(self):
+        gp1 = Geoposition(52.5, 13.4)
+        gp2 = None
+        self.assertTrue(gp1 != gp2)
