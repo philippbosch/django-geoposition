@@ -11,7 +11,7 @@ if (jQuery != undefined) {
             'scrollwheel': false
         };
 
-        $('p.geoposition-widget').each(function() {
+        $('.geoposition-widget').each(function() {
             var $container = $(this),
                 $mapContainer = $('<div class="geoposition-map" />'),
                 $addressRow = $('<div class="geoposition-address" />'),
@@ -25,6 +25,8 @@ if (jQuery != undefined) {
                 mapLatLng,
                 mapOptions,
                 marker;
+
+            $mapContainer.css('height', $container.data('map-widget-height') + 'px');
 
 
             function doSearch() {
@@ -102,7 +104,9 @@ if (jQuery != undefined) {
             mapLatLng = new google.maps.LatLng(latitude, longitude);
             mapOptions = $.extend({}, mapDefaults, {
                 'center': mapLatLng,
-                'zoom': latitude && longitude ? 15 : 1
+                'zoom': latitude && longitude ? 15 : 1,
+                'streetViewControl': false,
+                'panControl': false
             });
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             marker = new google.maps.Marker({

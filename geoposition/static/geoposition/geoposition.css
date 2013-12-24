@@ -1,7 +1,24 @@
+.geoposition-widget {
+    overflow: hidden;
+}
+
 .geoposition-map {
-    height: 480px;
     position: relative;
     margin: 6px 0;
+    clear: both;
+}
+
+.geoposition-widget table {
+    float: left;
+    border: 0;
+    margin-bottom: 8px;
+}
+
+.geoposition-widget td {
+    border: 0;
+    padding: 0;
+    padding-right: 5px;
+    vertical-align: middle;
 }
 
 .geoposition-search {

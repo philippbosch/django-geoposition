@@ -1,4 +1,12 @@
-<p class="geoposition-widget">
-    {{ latitude.label|capfirst }}: {{ latitude.html }}<br>
-    {{ longitude.label|capfirst }}: {{ longitude.html }}
-</p>
+<div class="geoposition-widget" data-map-widget-height="{{ config.map_widget_height }}">
+    <table>
+        <tr>
+            <td>{{ latitude.label|capfirst }}</td>
+            <td>{{ latitude.html }}</td>
+        </tr>
+        <tr>
+            <td>{{ longitude.label|capfirst }}</td>
+            <td>{{ longitude.html }}</td>
+        </tr>
+    </table>
+</div>
