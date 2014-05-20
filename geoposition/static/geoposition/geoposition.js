@@ -8,7 +8,14 @@ if (jQuery != undefined) {
     $(document).ready(function() {
         var mapDefaults = {
             'mapTypeId': google.maps.MapTypeId.ROADMAP,
-            'scrollwheel': false
+            'scrollwheel': false,
+            'streetViewControl': false,
+            'panControl': false
+        };
+
+        var markerDefaults = {
+            'draggable': true,
+            'animation': google.maps.Animation.DROP
         };
 
         $('.geoposition-widget').each(function() {
@@ -24,10 +31,14 @@ if (jQuery != undefined) {
                 map,
                 mapLatLng,
                 mapOptions,
+                mapCustomOptions,
+                markerOptions,
+                markerCustomOptions,
                 marker;
 
             $mapContainer.css('height', $container.data('map-widget-height') + 'px');
-
+            mapCustomOptions = $container.data('map-options') || {};
+            markerCustomOptions = $container.data('marker-options') || {};
 
             function doSearch() {
                 var gc = new google.maps.Geocoder();
@@ -102,19 +113,21 @@ if (jQuery != undefined) {
             $container.append($searchRow, $mapContainer, $addressRow);
 
             mapLatLng = new google.maps.LatLng(latitude, longitude);
-            mapOptions = $.extend({}, mapDefaults, {
-                'center': mapLatLng,
-                'zoom': latitude && longitude ? 15 : 1,
-                'streetViewControl': false,
-                'panControl': false
+
+            mapOptions = $.extend({}, mapDefaults, mapCustomOptions, {
+                'center': mapLatLng
             });
+
+            if (!mapOptions.zoom) {
+                mapOptions['zoom'] = latitude && longitude ? 15 : 1;
+            }
+
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
-            marker = new google.maps.Marker({
+            markerOptions = $.extend({}, markerDefaults, markerCustomOptions, {
                 'position': mapLatLng,
-                'map': map,
-                'draggable': true,
-                'animation': google.maps.Animation.DROP
+                'map': map
             });
+            marker = new google.maps.Marker(markerOptions);
             google.maps.event.addListener(marker, 'dragend', function() {
                 $latitudeField.val(this.position.lat());
                 $longitudeField.val(this.position.lng());

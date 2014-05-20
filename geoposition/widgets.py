@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import json
 from django import forms
 from django.template.loader import render_to_string
 from django.utils import six
@@ -33,7 +34,9 @@ class GeopositionWidget(forms.MultiWidget):
                 'label': _("longitude"),
             },
             'config': {
-                'map_widget_height': settings.GEOPOSITION_MAP_WIDGET_HEIGHT
+                'map_widget_height': settings.GEOPOSITION_MAP_WIDGET_HEIGHT,
+                'map_options': json.dumps(settings.GEOPOSITION_MAP_OPTIONS),
+                'marker_options': json.dumps(settings.GEOPOSITION_MARKER_OPTIONS),
             }
         })
 
