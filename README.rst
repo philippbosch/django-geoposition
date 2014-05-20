@@ -105,7 +105,7 @@ Settings
 --------
 
 You can customize the `MapOptions`_ and `MarkerOptions`_ used to initialize the
-map and marker in JavaScript by defining a ``GEOPOSITION_MAP_OPTIONS`` or
+map and marker in JavaScript by defining ``GEOPOSITION_MAP_OPTIONS`` or
 ``GEOPOSITION_MARKER_OPTIONS`` in your ``settings.py``.
 
 **Example**::
@@ -119,10 +119,10 @@ map and marker in JavaScript by defining a ``GEOPOSITION_MAP_OPTIONS`` or
         'cursor': 'move'
     }
 
-Please note that you cannot use a value like ``new LatLng(52.5,13.4)`` for a
-setting like ``center`` or ``position`` because that would end up as a string in
-the JavaScript code and not be evaluated. Please use `Lat/Lng Object Literals`_
-for that purpose, e.g. ``{'lat': 52.5, 'lng': 13.4}``.
+Please note that you cannot use a value like ``new google.maps.LatLng(52.5,13.4)``
+for a setting like ``center`` or ``position`` because that would end up as a
+string in the JavaScript code and not be evaluated. Please use
+`Lat/Lng Object Literals`_ for that purpose, e.g. ``{'lat': 52.5, 'lng': 13.4}``.
 
 You can also customize the height of the displayed map widget by setting
 ``GEOPOSITION_MAP_WIDGET_HEIGHT`` to an integer value (default is 480).
