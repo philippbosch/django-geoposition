@@ -26,8 +26,8 @@ if (jQuery != undefined) {
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
-                latitude = parseFloat($latitudeField.val()) || 0,
-                longitude = parseFloat($longitudeField.val()) || 0,
+                latitude = parseFloat($latitudeField.val()) || null,
+                longitude = parseFloat($longitudeField.val()) || null,
                 map,
                 mapLatLng,
                 mapOptions,
@@ -114,19 +114,25 @@ if (jQuery != undefined) {
 
             mapLatLng = new google.maps.LatLng(latitude, longitude);
 
-            mapOptions = $.extend({}, mapDefaults, mapCustomOptions, {
-                'center': mapLatLng
-            });
+            mapOptions = $.extend({}, mapDefaults, mapCustomOptions);
 
-            if (!mapOptions.zoom) {
+            if (!(latitude === null && longitude === null && mapOptions['center'])) {
+                mapOptions['center'] = mapLatLng;
+            }
+
+            if (!mapOptions['zoom']) {
                 mapOptions['zoom'] = latitude && longitude ? 15 : 1;
             }
 
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             markerOptions = $.extend({}, markerDefaults, markerCustomOptions, {
-                'position': mapLatLng,
                 'map': map
             });
+
+            if (!(latitude === null && longitude === null && markerOptions['position'])) {
+                markerOptions['position'] = mapLatLng;
+            }
+
             marker = new google.maps.Marker(markerOptions);
             google.maps.event.addListener(marker, 'dragend', function() {
                 $latitudeField.val(this.position.lat());

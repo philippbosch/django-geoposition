@@ -101,6 +101,10 @@ map and marker in JavaScript by defining a ``GEOPOSITION_MAP_OPTIONS`` or
         'cursor': 'move'
     }
 
+Please note that you cannot use a value like ``new LatLng(52.5,13.4)`` for a
+setting like ``center`` or ``position`` because that would end up as a string in
+the JavaScript code and not be evaluated. Please use `Lat/Lng Object Literals`_
+for that purpose, e.g. ``{'lat': 52.5, 'lng': 13.4}``.
 
 You can also customize the height of the displayed map widget by setting
 ``GEOPOSITION_MAP_WIDGET_HEIGHT`` to an integer value (default is 480).
@@ -114,3 +118,4 @@ You can also customize the height of the displayed map widget by setting
 .. _jQuery: http://jquery.com
 .. _MapOptions: https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions
 .. _MarkerOptions: https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions
+.. _Lat/Lng Object Literals: https://developers.google.com/maps/documentation/javascript/examples/map-latlng-literal
