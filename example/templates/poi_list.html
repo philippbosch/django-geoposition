@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Points of Interest</title>
+        <style>
+            #map-canvas {
+                height: 600px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Points of Interest</h1>
+
+        <dl>
+            {% for poi in pois %}
+                <dt>{{ poi.name }}</dt>
+                <dd>{{ poi.position }}</dd>
+            {% endfor %}
+        </dl>
+
+        <div id="map-canvas"></div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+        <script>
+            function initialize() {
+                var map = new google.maps.Map(document.getElementById('map-canvas'));
+                var bounds = new google.maps.LatLngBounds();
+
+                function addMarker(lat, lng, title) {
+                    var position = new google.maps.LatLng(lat, lng);
+                    var marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: title
+                    });
+                    bounds.extend(position);
+                }
+
+                {% for poi in pois %}
+                    addMarker({{ poi.position.latitude }}, {{ poi.position.longitude }}, "{{ poi.name }}");
+                {% endfor %}
+
+                map.fitBounds(bounds);
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </body>
+</html>

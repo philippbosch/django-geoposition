@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import PointOfInterest
 
-# Create your views here.
+def poi_list(request):
+    pois = PointOfInterest.objects.all()
+    return render(request, 'poi_list.html', {'pois': pois})
