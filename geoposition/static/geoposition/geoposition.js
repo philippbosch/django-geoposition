@@ -4,8 +4,18 @@ if (jQuery != undefined) {
     }
 }
 
+
 (function($) {
+
     $(document).ready(function() {
+
+        try {
+            var _ = google;
+        } catch (ReferenceError) {
+            console.log('geoposition: "google" not defined.  You might not be connected to the internet.');
+            return;
+        }
+
         var mapDefaults = {
             'mapTypeId': google.maps.MapTypeId.ROADMAP,
             'scrollwheel': false,
