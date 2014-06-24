@@ -12,7 +12,7 @@ if (jQuery != undefined) {
         try {
             var _ = google;
         } catch (ReferenceError) {
-            console.log('geoposition: "google" not defined.  You might not be connected to the internet.');
+            console.log(getMessages('geoposition: "google" not defined.  You might not be connected to the internet.'));
             return;
         }
 
@@ -33,7 +33,7 @@ if (jQuery != undefined) {
                 $mapContainer = $('<div class="geoposition-map" />'),
                 $addressRow = $('<div class="geoposition-address" />'),
                 $searchRow = $('<div class="geoposition-search" />'),
-                $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
+                $searchInput = $('<input>', {'type': 'search', 'placeholder': getMessages('Start typing an address …')}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
                 latitude = parseFloat($latitudeField.val()) || null,
@@ -163,5 +163,15 @@ if (jQuery != undefined) {
                 doGeocode();
             });
         });
+
+        function getMessages(message) {
+            if (geopositionMessages[message] !== 'undefined') {
+                return geopositionMessages[message];
+            }
+            else {
+                return message;
+            }
+        }
+
     });
-})(django.jQuery);
+})(django.jQuery, geopositionMessages);
