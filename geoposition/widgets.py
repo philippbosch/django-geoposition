@@ -5,6 +5,7 @@ from django import forms
 from django.template.loader import render_to_string
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language
 from .conf import settings
 
 
@@ -43,6 +44,7 @@ class GeopositionWidget(forms.MultiWidget):
     class Media:
         js = (
             '//maps.google.com/maps/api/js?sensor=false',
+            'geoposition/locale/' + get_language() +'/messages.js',
             'geoposition/geoposition.js',
         )
         css = {
