@@ -4,12 +4,13 @@ python:
   - 2.7
   - 3.2
   - 3.3
+  - 3.4
 env:
-  - DJANGO=1.4.10
+  - DJANGO=1.4.13
   - DJANGO=1.5
-  - DJANGO=1.5.5
+  - DJANGO=1.5.8
   - DJANGO=1.6
-  - DJANGO=1.6.1
+  - DJANGO=1.6.5
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install . --use-mirrors
@@ -19,6 +20,8 @@ matrix:
   exclude:
     # Django doesn't support following combinations
     - python: 3.2
-      env: DJANGO=1.4.10
+      env: DJANGO=1.4.13
     - python: 3.3
-      env: DJANGO=1.4.10
+      env: DJANGO=1.4.13
+    - python: 3.4
+      env: DJANGO=1.4.13
