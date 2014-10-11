@@ -1,19 +1,27 @@
 from __future__ import unicode_literals
+from copy import deepcopy
 
 import json
+import re
+
 from django import forms
 from django.template.loader import render_to_string
 from django.utils import six
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from .conf import settings
 
 
 class GeopositionWidget(forms.MultiWidget):
-    def __init__(self, attrs=None):
+    map_options = {}
+
+    def __init__(self, attrs=None, map_options=None):
         widgets = (
             forms.TextInput(),
             forms.TextInput(),
         )
+        self.map_options = map_options or {}
         super(GeopositionWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
@@ -24,6 +32,8 @@ class GeopositionWidget(forms.MultiWidget):
         return [None, None]
 
     def format_output(self, rendered_widgets):
+        options = deepcopy(settings.MAP_OPTIONS)
+        options.update(self.map_options)
         return render_to_string('geoposition/widgets/geoposition.html', {
             'latitude': {
                 'html': rendered_widgets[0],
@@ -34,8 +44,10 @@ class GeopositionWidget(forms.MultiWidget):
                 'label': _("longitude"),
             },
             'config': {
+                'latitude_selector': '#' + re.search('id="([^"]+)"', rendered_widgets[0]).group(1),
+                'longitude_selector': '#' + re.search('id="([^"]+)"', rendered_widgets[1]).group(1),
                 'map_widget_height': settings.MAP_WIDGET_HEIGHT or 500,
-                'map_options': json.dumps(settings.MAP_OPTIONS),
+                'map_options': json.dumps(options),
                 'marker_options': json.dumps(settings.MARKER_OPTIONS),
             }
         })
@@ -48,3 +60,4 @@ class GeopositionWidget(forms.MultiWidget):
         css = {
             'all': ('geoposition/geoposition.css',)
         }
+

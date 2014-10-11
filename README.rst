@@ -138,6 +138,17 @@ You can also customize the height of the displayed map widget by setting
 ``GEOPOSITION_MAP_WIDGET_HEIGHT`` to an integer value (default is 480).
 
 
+Per field map options
+^^^^^^^^^^^^^^^^^^^^^
+
+The `MapOptions`_ can also be set as per-field values by passing an appropriate
+ dictionary to the ``GeopositionField``::
+
+    map = GeopositionField(map_options={
+        'scrollwheel': False,
+    })
+
+
 License
 -------
 
