@@ -166,6 +166,25 @@ if (jQuery != undefined) {
                 marker.setPosition(center);
                 doGeocode();
             });
+            // If there is no value yet, try to read from current location
+            if(isNotSet()) {
+                if(mapOptions['center_on_current'] || markerOptions['position_on_current']) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        // Try catch in case position was not found
+                        try {
+                            var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        }catch(e){
+                            return;
+                        }
+                        if(mapOptions['center_on_current']){
+                            map.setCenter(center);
+                        }
+                        if(markerOptions['position_on_current']){
+                            marker.setPosition(center);
+                        }
+                    });
+                }
+            }
         });
     });
 })(django.jQuery);
