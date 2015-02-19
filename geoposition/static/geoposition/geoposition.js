@@ -98,6 +98,10 @@ if (jQuery != undefined) {
                 });
             }
 
+            function isNotSet() {
+                return latitude === null && longitude === null;
+            }
+
             var autoSuggestTimer = null;
             $searchInput.on('keydown', function(e) {
                 if (autoSuggestTimer) {
@@ -126,7 +130,7 @@ if (jQuery != undefined) {
 
             mapOptions = $.extend({}, mapDefaults, mapCustomOptions);
 
-            if (!(latitude === null && longitude === null && mapOptions['center'])) {
+            if (!(isNotSet() && mapOptions['center'])) {
                 mapOptions['center'] = mapLatLng;
             }
 
@@ -139,7 +143,7 @@ if (jQuery != undefined) {
                 'map': map
             });
 
-            if (!(latitude === null && longitude === null && markerOptions['position'])) {
+            if (!(isNotSet() && markerOptions['position'])) {
                 markerOptions['position'] = mapLatLng;
             }
 
