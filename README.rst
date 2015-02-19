@@ -107,6 +107,7 @@ Settings
 You can customize the `MapOptions`_ and `MarkerOptions`_ used to initialize the
 map and marker in JavaScript by defining ``GEOPOSITION_MAP_OPTIONS`` or
 ``GEOPOSITION_MARKER_OPTIONS`` in your ``settings.py``.
+Use ``center_on_current`` in ``GEOPOSITION_MAP_OPTIONS`` and ``position_on_current`` in ``GEOPOSITION_MARKER_OPTIONS`` to position the map using the browser's geolocation.
 
 **Example**::
 
