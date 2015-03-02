@@ -33,3 +33,14 @@ class Geoposition(object):
 
     def __ne__(self, other):
         return not isinstance(other, Geoposition) or self.latitude != other.latitude or self.longitude != other.longitude
+
+class GeopositionWithZoom(Geoposition):
+    def __init__(self, latitude, longitude, zoom):
+        super(GeopositionWithZoom, self).__init__(latitude, longitude)
+        self.zoom = zoom
+
+    def __str__(self):
+        return "%s,%s" % (super(GeopositionWithZoom, self).__str__(), self.zoom)
+
+    def decompress(self):
+        return [self.latitude, self.longitude, self.zoom]
