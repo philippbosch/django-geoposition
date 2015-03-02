@@ -31,3 +31,14 @@ class GeopositionField(forms.MultiValueField):
         if value_list:
             return value_list
         return ""
+
+class GeopositionWithZoomField(GeopositionField):
+    widget_class = GeopositionWithZoomWidget
+    object_class = GeopositionWithZoom
+    def _get_fields(self):
+        return (
+            forms.DecimalField(label=_('latitude')),
+            forms.DecimalField(label=_('longitude')),
+            forms.IntegerField(label=_('zoom')),
+        )
+
