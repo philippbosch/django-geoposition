@@ -7,6 +7,8 @@ from django.utils.encoding import smart_text
 
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
+from . import Geoposition, GeopositionWithZoom
+from .forms import GeopositionField as GeopositionFormField, GeopositionWithZoomField as GeopositionWithZoomFormField
 
 
 class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
