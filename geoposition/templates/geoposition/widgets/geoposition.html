@@ -8,5 +8,11 @@
             <td>{{ longitude.label|capfirst }}</td>
             <td>{{ longitude.html }}</td>
         </tr>
+        {% if zoom %}
+        <tr>
+            <td>{{ zoom.label|capfirst }}</td>
+            <td>{{ zoom.html }}</td>
+        </tr>
+        {% endif %}
     </table>
 </div>
