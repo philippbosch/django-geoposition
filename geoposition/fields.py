@@ -5,8 +5,6 @@ from django.utils.six import with_metaclass
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import smart_text
 
-from . import Geoposition
-from .forms import GeopositionField as GeopositionFormField
 from . import Geoposition, GeopositionWithZoom
 from .forms import GeopositionField as GeopositionFormField, GeopositionWithZoomField as GeopositionWithZoomFormField
 
