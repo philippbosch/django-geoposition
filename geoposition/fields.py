@@ -12,6 +12,12 @@ from .forms import GeopositionField as GeopositionFormField, GeopositionWithZoom
 class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
     description = _("A geoposition (latitude and longitude)")
 
+    object_class = Geoposition
+
+    formfield_class = GeopositionFormField
+
+    defaults = ('0.0', '0.0',)
+
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 42
         super(GeopositionField, self).__init__(*args, **kwargs)
@@ -19,26 +25,29 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
     def get_internal_type(self):
         return 'CharField'
 
+    def _set_default_values(self, value_parts):
+        for i, d in enumerate(self.defaults):
+            try:
+                value_parts[i]
+            except IndexError:
+                value_parts.append(d)
+
+        return value_parts
+
     def to_python(self, value):
         if not value or value == 'None':
             return None
-        if isinstance(value, Geoposition):
+        if isinstance(value, self.object_class):
             return value
         if isinstance(value, list):
-            return Geoposition(value[0], value[1])
+            return self.object_class(*value)
 
         # default case is string
-        value_parts = value.rsplit(',')
-        try:
-            latitude = value_parts[0]
-        except IndexError:
-            latitude = '0.0'
-        try:
-            longitude = value_parts[1]
-        except IndexError:
-            longitude = '0.0'
+        value_parts = value.split(',')
+        # Set default values if not found
+        value_parts = self._set_default_values(value_parts)
 
-        return Geoposition(latitude, longitude)
+        return self.object_class(*value_parts)
 
     def get_prep_value(self, value):
         return str(value)
@@ -49,7 +58,7 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
 
     def formfield(self, **kwargs):
         defaults = {
-            'form_class': GeopositionFormField
+            'form_class': self.formfield_class
         }
         defaults.update(kwargs)
         return super(GeopositionField, self).formfield(**defaults)
