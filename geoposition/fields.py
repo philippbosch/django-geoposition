@@ -55,3 +55,16 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
         }
         defaults.update(kwargs)
         return super(GeopositionField, self).formfield(**defaults)
+
+class GeopositionWithZoomField(GeopositionField):
+    description = _("A geoposition (latitude, longitude and zoom)")
+
+    object_class = GeopositionWithZoom
+
+    formfield_class = GeopositionWithZoomFormField
+
+    defaults = ('0.0', '0.0', 8)
+
+    def __init__(self, *args, **kwargs):
+        kwargs['max_length'] = 45
+        super(GeopositionWithZoomField, self).__init__(*args, **kwargs)
