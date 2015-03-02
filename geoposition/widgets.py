@@ -48,3 +48,22 @@ class GeopositionWidget(forms.MultiWidget):
         css = {
             'all': ('geoposition/geoposition.css',)
         }
+
+class GeopositionWithZoomWidget(GeopositionWidget):
+    defaults = [None, None, None]
+
+    def _get_widgets(self):
+        return (
+            forms.TextInput(),
+            forms.TextInput(),
+            forms.TextInput(),
+        )
+
+    def _get_rendered_widgets(self, rendered_widgets):
+        latlng = super(GeopositionWithZoomWidget, self)._get_rendered_widgets(rendered_widgets)
+        print rendered_widgets
+        latlng['zoom'] = {
+            'html': rendered_widgets[2],
+            'label': _('zoom')
+        }
+        return latlng
