@@ -16,6 +16,9 @@ class Geoposition(object):
         self.latitude = Decimal(latitude)
         self.longitude = Decimal(longitude)
 
+    def decompress(self):
+        return [self.latitude, self.longitude]
+
     def __str__(self):
         return "%s,%s" % (self.latitude, self.longitude)
 
