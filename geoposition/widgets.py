@@ -71,7 +71,6 @@ class GeopositionWithZoomWidget(GeopositionWidget):
 
     def _get_rendered_widgets(self, rendered_widgets):
         latlng = super(GeopositionWithZoomWidget, self)._get_rendered_widgets(rendered_widgets)
-        print rendered_widgets
         latlng['zoom'] = {
             'html': rendered_widgets[2],
             'label': _('zoom')
