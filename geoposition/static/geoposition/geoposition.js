@@ -36,8 +36,10 @@ if (jQuery != undefined) {
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
+                $zoomField = $container.find('input.geoposition:eq(2)'),
                 latitude = parseFloat($latitudeField.val()) || null,
                 longitude = parseFloat($longitudeField.val()) || null,
+                zoom = parseInt($zoomField.val(), 10) || null,
                 map,
                 mapLatLng,
                 mapOptions,
@@ -129,10 +131,14 @@ if (jQuery != undefined) {
             if (!(latitude === null && longitude === null && mapOptions['center'])) {
                 mapOptions['center'] = mapLatLng;
             }
-
-            if (!mapOptions['zoom']) {
-                mapOptions['zoom'] = latitude && longitude ? 15 : 1;
+            if(!zoom) {
+                if (!mapOptions['zoom']) {
+                    mapOptions['zoom'] = latitude && longitude ? 15 : 1;
+                }
+            } else {
+                mapOptions['zoom'] = zoom;
             }
+            
 
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
             markerOptions = $.extend({}, markerDefaults, markerCustomOptions, {
@@ -152,6 +158,18 @@ if (jQuery != undefined) {
             if ($latitudeField.val() && $longitudeField.val()) {
                 google.maps.event.trigger(marker, 'dragend');
             }
+
+            google.maps.event.addListener(map, 'zoom_changed', function() {
+                var zoomLevel = map.getZoom();
+                $zoomField.val(zoomLevel);
+            });
+
+            $zoomField.on('blur', function() {
+                var zoom = parseInt($zoomField.val(), 10);
+                if(!isNaN(zoom)) {
+                    map.setZoom(zoom);
+                }
+            });
 
             $latitudeField.add($longitudeField).on('keyup', function(e) {
                 var latitude = parseFloat($latitudeField.val()) || 0;
