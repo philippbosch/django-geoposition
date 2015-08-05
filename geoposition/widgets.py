@@ -67,7 +67,14 @@ class GeopositionMapOnlyWidgetTwo(forms.MultiWidget):
 
     def format_output(self, rendered_widgets):
         return render_to_string('geoposition/widgets/maponly.html', {
-            
+            'latitude': {
+                'html': rendered_widgets[0],
+                'label': _("latitude"),
+            },
+            'longitude': {
+                'html': rendered_widgets[1],
+                'label': _("longitude"),
+            },
             'config': {
                 'map_widget_height': settings.GEOPOSITION_MAP_WIDGET_HEIGHT,
                 'map_options': json.dumps(settings.GEOPOSITION_MAP_OPTIONS),
