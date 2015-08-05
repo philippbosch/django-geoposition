@@ -56,7 +56,7 @@ class GeopositionMapOnlyWidget(forms.MultiWidget):
             forms.TextInput(),
             forms.TextInput(),
         )
-        super(GeopositionWidget, self).__init__(widgets, attrs)
+        super(GeopositionMapOnlyWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
         if isinstance(value, six.text_type):
