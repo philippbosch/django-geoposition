@@ -102,11 +102,12 @@ just a little more work. In your template make sure that
     </form>
 
 
-Only Display  the Google Map Widget
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Only Display  the Google Map Widgets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Widget for only displaying a google map with marker, and search bar.
-- add GeopostionMapOnlyWidget in your django form
+- add MapOnlyWidget in your django form
+
 **Example**::
 
 class LocationTwoForm(forms.ModelForm):
@@ -116,7 +117,20 @@ class LocationTwoForm(forms.ModelForm):
         fields = ['description', 'location']
         required = False
         labels = {'location': ''}
-        widgets = {'location': GeopositionMapOnlyWidget}
+        widgets = {'location': MapOnlyWidget}
+
+
+ AdjustableMapOnlyWidget is also available
+ It it used the same way as map only, but the map settings can be adjusted in the template
+ This requires an import
+    from geoposition.custom_map import Options
+
+ Now render options as context data to use in your template
+ Options has three functions:
+        - height(size) defaults to 480
+        - map_options(key,value)
+        - marker_options(key, value)
+
 
 
 Settings
