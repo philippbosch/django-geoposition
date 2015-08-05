@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from .widgets import GeopositionWidget, GeopositionMapOnlyWidget
+from .widgets import GeopositionWidget
 from . import Geoposition
 
 
