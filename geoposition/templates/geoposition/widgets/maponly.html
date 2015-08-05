@@ -1,2 +1,20 @@
 <div class="geoposition-widget" data-map-widget-height="{{ config.map_widget_height }}" data-map-options="{{ config.map_options }}" data-marker-options="{{ config.marker_options }}">
+    <table>
+        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js">
+            $(document).ready(function() {
+               $('td').hide();
+            });
+
+        </script>
+        <tr>
+            <td>{{ latitude.label|capfirst }}</td>
+            <td>{{ latitude.html }}</td>
+        </tr>
+        <tr>
+
+
+            <td>{{ longitude.label|capfirst }}</td>
+            <td>{{ longitude.html }}</td>
+        </tr>
+    </table>
 </div>
