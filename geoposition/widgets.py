@@ -98,7 +98,7 @@ class GeopositionMapOnlyWidgetTwo(forms.MultiWidget):
         return [None,None]
 
     def format_output(self, rendered_widgets):
-        return render_to_string('geoposition/widgets/geoposition.html', {
+        return render_to_string('geoposition/widgets/maponly.html', {
             'latitude': {
                 'html': rendered_widgets[0],
                 'label': _("latitude"),
