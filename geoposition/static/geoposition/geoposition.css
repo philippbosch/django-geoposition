@@ -68,3 +68,5 @@
 .gmnoprint img {
     max-width: none; 
 }
+
+.hidden { display: none; }

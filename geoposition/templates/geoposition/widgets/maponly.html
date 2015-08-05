@@ -2,14 +2,14 @@
     <table>
         <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js">
             $(document).ready(function() {
-               $('td').hide(function(){
+               $('td').onclick(function(){
                    $('td').hide();
                });
             });
 
         </script>
         <tr>
-            <td>fas{{ latitude.label|capfirst }}</td>
+            <td class='hidden'>{{ latitude.label|capfirst }}</td>
             <td>{{ latitude.html }}</td>
         </tr>
         <tr>
