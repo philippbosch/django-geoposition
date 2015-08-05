@@ -53,8 +53,8 @@ class GeopositionWidget(forms.MultiWidget):
 class GeopositionMapOnlyWidgetTwo(forms.MultiWidget):
     def __init__(self, attrs=None):
         widgets = (
-            forms.HiddenInput(),
-            forms.HiddenInput(),
+            forms.TextInput(),
+            forms.TextInput(),
         )
         super(GeopositionMapOnlyWidgetTwo, self).__init__(widgets, attrs)
 
