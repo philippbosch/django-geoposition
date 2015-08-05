@@ -50,13 +50,13 @@ class GeopositionWidget(forms.MultiWidget):
         }
 
 
-class GeopositionMapOnlyWidgetTwo(forms.MultiWidget):
+class GeopositionMapOnlyWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         widgets = (
             forms.TextInput(),
             forms.TextInput(),
         )
-        super(GeopositionMapOnlyWidgetTwo, self).__init__(widgets, attrs)
+        super(GeopositionWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
         if isinstance(value, six.text_type):
@@ -66,7 +66,7 @@ class GeopositionMapOnlyWidgetTwo(forms.MultiWidget):
         return [None,None]
 
     def format_output(self, rendered_widgets):
-        return render_to_string('geoposition/widgets/maponly.html', {
+        return render_to_string('geoposition/widgets/geoposition.html', {
             'latitude': {
                 'html': rendered_widgets[0],
                 'label': _("latitude"),
