@@ -97,6 +97,9 @@ class AdjustableMapOnlyWidget(forms.MultiWidget):
         widgets = (
             forms.TextInput(),
             forms.TextInput(),
+            forms.IntegerField(),
+            forms.CharField(),
+            forms.CharField(),
         )
         super(AdjustableMapOnlyWidget, self).__init__(widgets, attrs)
 
@@ -118,9 +121,9 @@ class AdjustableMapOnlyWidget(forms.MultiWidget):
                 'label': _("longitude"),
             },
             'config': {
-                'map_widget_height': Options.MAP_WIDGET_HEIGHT,
-                'map_options': json.dumps(Options.MAP_OPTIONS),
-                'marker_options': json.dumps(Options.MARKER_OPTIONS),
+                'map_widget_height': rendered_widgets[2],
+                'map_options': rendered_widgets[3],
+                'marker_options': rendered_widgets[4],
             }
         })
 

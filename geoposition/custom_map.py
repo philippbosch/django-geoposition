@@ -18,4 +18,3 @@ class Options:
     def marker_options(self, dicti):
         self.MARKER_OPTIONS = dicti
         return self.MARKER_OPTIONS
-
