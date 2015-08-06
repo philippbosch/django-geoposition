@@ -125,11 +125,12 @@ class LocationTwoForm(forms.ModelForm):
  This requires an import
     from geoposition.custom_map import Options
 
- Now render options as context data to use in your template
+Now Make Ajax calls to set functions in your views.
+
  Options has three functions:
         - height(size) defaults to 480
-        - map_options(key,value)
-        - marker_options(key, value)
+        - map_options(dictionary)
+        - marker_options(dictionary)
 
 
 

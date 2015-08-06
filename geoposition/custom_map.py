@@ -10,10 +10,10 @@ class Options:
         self.MAP_WIDGET_HEIGHT = size
         return self.MAP_WIDGET_HEIGHT
 
-    def map_options(self, key, value):
-        self.MAP_OPTIONS[key] = value
+    def map_options(self, dicti):
+        self.MAP_OPTIONS = dicti
         return self.MAP_OPTIONS
 
-    def marker_options(self, key, value):
-        self.MARKER_OPTIONS[key] = value
+    def marker_options(self, dicti):
+        self.MARKER_OPTIONS = dicti
         return self.MARKER_OPTIONS
