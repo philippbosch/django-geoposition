@@ -3,10 +3,9 @@
 
 class Options:
 
-    def __init__(self):
-        self.MAP_WIDGET_HEIGHT = 480
-        self.MAP_OPTIONS = {}
-        self.MARKER_OPTIONS = {}
+    MAP_WIDGET_HEIGHT = 480
+    MAP_OPTIONS = {}
+    MARKER_OPTIONS = {}
 
     def height(self, size):
         self.MAP_WIDGET_HEIGHT = size
@@ -19,3 +18,4 @@ class Options:
     def marker_options(self, dicti):
         self.MARKER_OPTIONS = dicti
         return self.MARKER_OPTIONS
+
