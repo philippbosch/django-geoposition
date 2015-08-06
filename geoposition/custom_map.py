@@ -2,9 +2,11 @@
 
 
 class Options:
-    MAP_WIDGET_HEIGHT = 480
-    MAP_OPTIONS = {}
-    MARKER_OPTIONS = {}
+
+    def __init__(self):
+        self.MAP_WIDGET_HEIGHT = 480
+        self.MAP_OPTIONS = {}
+        self.MARKER_OPTIONS = {}
 
     def height(self, size):
         self.MAP_WIDGET_HEIGHT = size
