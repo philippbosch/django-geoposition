@@ -9,6 +9,8 @@
 }
 
 .geoposition-widget table {
+    height: 100%;
+    width: 100%;
     float: left;
     border: 0;
     margin-bottom: 8px;
