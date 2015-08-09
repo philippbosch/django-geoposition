@@ -3,14 +3,13 @@
 }
 
 .geoposition-map {
+    height: auto;
     position: relative;
     margin: 6px 0;
     clear: both;
 }
 
 .geoposition-widget table {
-    height: 100%;
-    width: 100%;
     float: left;
     border: 0;
     margin-bottom: 8px;
