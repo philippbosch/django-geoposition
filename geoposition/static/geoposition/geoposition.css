@@ -24,13 +24,13 @@
 }
 
 .geoposition-search {
-    height: 20%;
+    height: 100%;
     width: 100%;
     text-align: right;
 }
 
 .geoposition-search input {
-    height: 20%;
+    height: 100%;
     width: 100%;
 }
 
