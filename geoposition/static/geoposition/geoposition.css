@@ -23,10 +23,12 @@
 
 .geoposition-search {
     width: 100%;
+    text-align: right;
 }
 
 .geoposition-search input {
     width: 100%;
+    text-align: right;
 }
 
 .geoposition-address {
