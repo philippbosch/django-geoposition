@@ -109,7 +109,7 @@ Only Display the Google Map Widget
 - add MapOnlyWidget in your django form
 
 **Example**::
-
+```
 class LocationTwoForm(forms.ModelForm):
 
     class Meta:
@@ -118,7 +118,7 @@ class LocationTwoForm(forms.ModelForm):
         required = False
         labels = {'location': ''}
         widgets = {'location': MapOnlyWidget}
-
+```
 
  AdjustableMapOnlyWidget is also available
  It it used the same way as map only, but the map settings can be adjusted in the template
