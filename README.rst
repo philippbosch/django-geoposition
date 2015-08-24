@@ -108,9 +108,9 @@ Only Display the Google Map Widget
 - Widget for only displaying a google map with marker, and search bar.
 - add MapOnlyWidget in your django form
 
-**Example**::
+**Example**:
+::
 
-.. code-block:: python
 
 class LocationTwoForm(forms.ModelForm):
 
