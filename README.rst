@@ -112,14 +112,14 @@ Only Display the Google Map Widget
 ::
 
 
-class LocationTwoForm(forms.ModelForm):
+    class LocationTwoForm(forms.ModelForm):
 
-    class Meta:
-        model = Location
-        fields = ['description', 'location']
-        required = False
-        labels = {'location': ''}
-        widgets = {'location': MapOnlyWidget}
+        class Meta:
+            model = Location
+            fields = ['description', 'location']
+            required = False
+            labels = {'location': ''}
+            widgets = {'location': MapOnlyWidget}
 
 
 Settings
