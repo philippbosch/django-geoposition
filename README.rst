@@ -122,20 +122,6 @@ class LocationTwoForm(forms.ModelForm):
         widgets = {'location': MapOnlyWidget}
 
 
- AdjustableMapOnlyWidget is also available
- It it used the same way as map only, but the map settings can be adjusted in the template
- This requires an import
-    from geoposition.custom_map import Options
-
-Now Make Ajax calls to set functions in your views.
-
- Options has three functions:
-        - height(size) defaults to 480
-        - map_options(dictionary)
-        - marker_options(dictionary)
-
-
-
 Settings
 --------
 
