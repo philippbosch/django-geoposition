@@ -102,8 +102,8 @@ just a little more work. In your template make sure that
     </form>
 
 
-Only Display  the Google Map Widgets
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Only Display the Google Map Widget
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Widget for only displaying a google map with marker, and search bar.
 - add MapOnlyWidget in your django form
