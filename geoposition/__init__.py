@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 from decimal import Decimal
-from django.contrib.gis.geos import GEOSGeometry
 
 VERSION = (0, 2, 2)
 __version__ = '.'.join(map(str, VERSION))

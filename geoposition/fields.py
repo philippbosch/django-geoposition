@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from django.contrib.gis.db.models import PointField
 
 from django.db import models
 from django.utils.six import with_metaclass
@@ -8,6 +7,7 @@ from django.utils.encoding import smart_text
 
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
+
 
 class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
     description = _("A geoposition (latitude and longitude)")
