@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from django.contrib.gis.db.models import PointField
 
 from django.db import models
 from django.utils.six import with_metaclass
@@ -8,13 +9,14 @@ from django.utils.encoding import smart_text
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
 
-
 class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
     description = _("A geoposition (latitude and longitude)")
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 42
+        altitude_available = kwargs.pop('altitude', False)
         super(GeopositionField, self).__init__(*args, **kwargs)
+        self.altitude_available = altitude_available
 
     def get_internal_type(self):
         return 'CharField'
@@ -25,7 +27,7 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
         if isinstance(value, Geoposition):
             return value
         if isinstance(value, list):
-            return Geoposition(value[0], value[1])
+            return Geoposition(*value)
 
         # default case is string
         value_parts = value.rsplit(',')
@@ -37,8 +39,12 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
             longitude = value_parts[1]
         except IndexError:
             longitude = '0.0'
+        try:
+            altitude = value_parts[2]
+        except IndexError:
+            altitude = None
 
-        return Geoposition(latitude, longitude)
+        return Geoposition(latitude, longitude, altitude)
 
     def get_prep_value(self, value):
         return str(value)

@@ -8,5 +8,11 @@
             <td>{{ longitude.label|capfirst }}</td>
             <td>{{ longitude.html }}</td>
         </tr>
+        {% if altitude.available %}
+        <tr>
+            <td>{{ altitude.label|capfirst }}</td>
+            <td>{{ altitude.html }}</td>
+        </tr>
+        {% endif %}
     </table>
 </div>
