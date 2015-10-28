@@ -122,7 +122,7 @@ if (jQuery != undefined) {
             $searchInput.appendTo($searchRow);
             $container.append($searchRow, $mapContainer, $addressRow);
 
-            mapLatLng = new google.maps.LatLng(latitude, longitude);
+            mapLatLng = new google.maps.LatLng(latitude || 0, longitude || 0);
 
             mapOptions = $.extend({}, mapDefaults, mapCustomOptions);
 
@@ -154,14 +154,26 @@ if (jQuery != undefined) {
             }
 
             $latitudeField.add($longitudeField).on('keyup', function(e) {
-                var latitude = parseFloat($latitudeField.val()) || 0;
-                var longitude = parseFloat($longitudeField.val()) || 0;
-                var center = new google.maps.LatLng(latitude, longitude);
-                map.setCenter(center);
-                map.setZoom(15);
-                marker.setPosition(center);
+	      updateMarkerPos();
+	      map.setCenter(center);
+	      map.setZoom(15);
+	      
+            });
+	    
+	    map.addListener('rightclick', function(e) {
+                $latitudeField.val(e.latLng.lat());
+                $longitudeField.val(e.latLng.lng());
+		updateMarkerPos();
                 doGeocode();
             });
+	    
+	    function updateMarkerPos(){
+		var latitude = parseFloat($latitudeField.val()) || 0;
+                var longitude = parseFloat($longitudeField.val()) || 0;
+                var center = new google.maps.LatLng(latitude, longitude);
+                marker.setPosition(center);
+                doGeocode();
+	    }
         });
     });
 })(django.jQuery);
