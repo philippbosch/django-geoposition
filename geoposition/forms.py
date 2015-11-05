@@ -12,7 +12,7 @@ class GeopositionField(forms.MultiValueField):
     }
 
     def __init__(self, *args, **kwargs):
-        altitude_available = kwargs.pop('altitude', False)
+        altitude_available = kwargs.pop('elevation', False)
         self.widget = GeopositionWidget()
 
         fields = [
@@ -32,7 +32,7 @@ class GeopositionField(forms.MultiValueField):
     def widget_attrs(self, widget):
         classes = widget.attrs.get('class', '').split()
         classes.append('geoposition')
-        return {'class': ' '.join(classes), 'altitude_available': self.altitude_available}
+        return {'class': ' '.join(classes), 'altitude': self.altitude_available}
 
     def compress(self, value_list):
         if value_list:

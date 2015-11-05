@@ -14,7 +14,7 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 42
-        altitude_available = kwargs.pop('altitude', False)
+        altitude_available = kwargs.pop('elevation', False)
         super(GeopositionField, self).__init__(*args, **kwargs)
         self.altitude_available = altitude_available
 

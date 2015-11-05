@@ -38,7 +38,7 @@ class GeopositionWidget(forms.MultiWidget):
                 'label': _("longitude"),
             },
             'altitude': {
-                'available': self.attrs['altitude_available'],
+                'available': self.attrs['altitude'],
                 'html': rendered_widgets[2],
                 'label': _("altitude"),
             },

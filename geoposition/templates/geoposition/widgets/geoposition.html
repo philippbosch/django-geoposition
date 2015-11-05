@@ -1,17 +1,28 @@
+{% load static from staticfiles %}
 <div class="geoposition-widget" data-map-widget-height="{{ config.map_widget_height }}" data-map-options="{{ config.map_options }}" data-marker-options="{{ config.marker_options }}">
     <table>
         <tr>
             <td>{{ latitude.label|capfirst }}</td>
             <td>{{ latitude.html }}</td>
+            {% if altitude.available %}
+                <td><span class="altitude-loading"><img src="{% static 'geoposition/ajax-loader.gif' %}"/></span></td>
+            {% endif %}
         </tr>
         <tr>
             <td>{{ longitude.label|capfirst }}</td>
             <td>{{ longitude.html }}</td>
+            {% if altitude.available %}
+                <td><span class="altitude-loading"><img src="{% static 'geoposition/ajax-loader.gif' %}"/></span></td>
+            {% endif %}
         </tr>
         {% if altitude.available %}
         <tr>
             <td>{{ altitude.label|capfirst }}</td>
             <td>{{ altitude.html }}</td>
+            <td>
+                <a href="javascript:void(0);" class="altitude-error" style="color:red; font-weight: bold">( ! )</a>
+                <span class="altitude-loading"><img src="{% static 'geoposition/ajax-loader.gif' %}"/></span>
+            </td>
         </tr>
         {% endif %}
     </table>
