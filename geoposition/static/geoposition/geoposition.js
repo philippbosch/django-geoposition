@@ -18,6 +18,11 @@ if (jQuery != undefined) {
 
         var mapDefaults = {
             'mapTypeId': google.maps.MapTypeId.ROADMAP,
+            'mapTypeControlOptions': {
+                'mapTypeIds': [google.maps.MapTypeId.ROADMAP,
+                    google.maps.MapTypeId.TERRAIN,
+                    google.maps.MapTypeId.HYBRID]
+            },
             'scrollwheel': false,
             'streetViewControl': false,
             'panControl': false
@@ -36,6 +41,9 @@ if (jQuery != undefined) {
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
+                $elevationField = $container.find('input.geoposition:eq(2)'),
+                $elevationLoading = $container.find('.altitude-loading').hide(),
+                $elevationError = $container.find('.altitude-error:eq(0)'),
                 latitude = parseFloat($latitudeField.val()) || null,
                 longitude = parseFloat($longitudeField.val()) || null,
                 map,
@@ -44,7 +52,8 @@ if (jQuery != undefined) {
                 mapCustomOptions,
                 markerOptions,
                 markerCustomOptions,
-                marker;
+                marker,
+                elevator = $elevationField.length > 0 ? new google.maps.ElevationService() : null;
 
             $mapContainer.css('height', $container.data('map-widget-height') + 'px');
             mapCustomOptions = $container.data('map-options') || {};
@@ -144,9 +153,38 @@ if (jQuery != undefined) {
             }
 
             marker = new google.maps.Marker(markerOptions);
+
             google.maps.event.addListener(marker, 'dragend', function() {
-                $latitudeField.val(this.position.lat());
-                $longitudeField.val(this.position.lng());
+                var lat = this.position.lat(),
+                    lng = this.position.lng(),
+                    latLng = new google.maps.LatLng(lat, lng);
+
+                if (elevator) {
+                    $elevationLoading.show();
+                    $elevationError.hide();
+
+                    elevator.getElevationForLocations({
+                        'locations': [latLng]
+                    }, function (results, status) {
+                        $latitudeField.val(lat);
+                        $longitudeField.val(lng);
+
+                        if (status === google.maps.ElevationStatus.OK) {
+                            // Retrieve the first result
+                            if (results[0]) {
+                                $elevationField.val(results[0].elevation);
+                            } else {
+                                $elevationError.attr('title', "Elevation: No results found").show();
+                            }
+                        } else {
+                            $elevationError.attr('title', 'Elevation service failed due to: ' + status).show();
+                        }
+                        $elevationLoading.hide();
+                    });
+                } else {
+                    $latitudeField.val(lat);
+                    $longitudeField.val(lng);
+                }
                 doGeocode();
             });
             if ($latitudeField.val() && $longitudeField.val()) {

@@ -10,18 +10,22 @@ from .conf import settings
 
 class GeopositionWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
-        widgets = (
+        widgets = [
             forms.TextInput(),
             forms.TextInput(),
-        )
+            forms.TextInput(),
+        ]
         super(GeopositionWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
         if isinstance(value, six.text_type):
             return value.rsplit(',')
         if value:
-            return [value.latitude, value.longitude]
-        return [None,None]
+            if hasattr(value, 'altitude'):
+                return [value.latitude, value.longitude, value.altitude]
+            else:
+                return [value.latitude, value.longitude]
+        return [None, None, None]
 
     def format_output(self, rendered_widgets):
         return render_to_string('geoposition/widgets/geoposition.html', {
@@ -32,6 +36,11 @@ class GeopositionWidget(forms.MultiWidget):
             'longitude': {
                 'html': rendered_widgets[1],
                 'label': _("longitude"),
+            },
+            'altitude': {
+                'available': self.attrs['altitude'],
+                'html': rendered_widgets[2],
+                'label': _("altitude"),
             },
             'config': {
                 'map_widget_height': settings.GEOPOSITION_MAP_WIDGET_HEIGHT,

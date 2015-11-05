@@ -14,7 +14,9 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 42
+        altitude_available = kwargs.pop('elevation', False)
         super(GeopositionField, self).__init__(*args, **kwargs)
+        self.altitude_available = altitude_available
 
     def get_internal_type(self):
         return 'CharField'
@@ -25,7 +27,7 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
         if isinstance(value, Geoposition):
             return value
         if isinstance(value, list):
-            return Geoposition(value[0], value[1])
+            return Geoposition(*value)
 
         # default case is string
         value_parts = value.rsplit(',')
@@ -37,8 +39,12 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
             longitude = value_parts[1]
         except IndexError:
             longitude = '0.0'
+        try:
+            altitude = value_parts[2]
+        except IndexError:
+            altitude = None
 
-        return Geoposition(latitude, longitude)
+        return Geoposition(latitude, longitude, altitude)
 
     def get_prep_value(self, value):
         return str(value)
