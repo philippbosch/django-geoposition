@@ -18,7 +18,7 @@ class GeopositionField(models.Field):
     def get_internal_type(self):
         return 'CharField'
 
-    def from_db_value(self, value, expression, connection, context):
+    def _parse_position(self, value):
         if not value or value == 'None':
             return None
         if isinstance(value, Geoposition):
@@ -39,6 +39,12 @@ class GeopositionField(models.Field):
             longitude = '0.0'
 
         return Geoposition(latitude, longitude)
+
+    def from_db_value(self, value, expression, connection, context):
+        return self._parse_position(value)
+
+    def to_python(self, value):
+        return self._parse_position(value)
 
     def get_prep_value(self, value):
         return str(value)
