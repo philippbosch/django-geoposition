@@ -24,7 +24,7 @@ class GeopositionField(models.Field):
         if isinstance(value, Geoposition):
             return value
         if isinstance(value, list):
-            value = map(str, value)
+            value = list(map(str, value))
             return Geoposition(value[0], value[1])
 
         # default case is string
