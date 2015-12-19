@@ -9,8 +9,10 @@ from .conf import settings
 
 
 class GeopositionWidget(forms.MultiWidget):
+
     def __init__(self, attrs=None):
         widgets = (
+            forms.TextInput(),
             forms.TextInput(),
             forms.TextInput(),
         )
@@ -20,10 +22,11 @@ class GeopositionWidget(forms.MultiWidget):
         if isinstance(value, six.text_type):
             return value.rsplit(',')
         if value:
-            return [value.latitude, value.longitude]
-        return [None,None]
+            return [value.latitude, value.longitude, value.elevation]
+        return [0, 0, 0]
 
     def format_output(self, rendered_widgets):
+        # return ''.join(rendered_widgets)
         return render_to_string('geoposition/widgets/geoposition.html', {
             'latitude': {
                 'html': rendered_widgets[0],
@@ -32,6 +35,10 @@ class GeopositionWidget(forms.MultiWidget):
             'longitude': {
                 'html': rendered_widgets[1],
                 'label': _("longitude"),
+            },
+            'elevation': {
+                'html': rendered_widgets[2],
+                'label': _("elevation"),
             },
             'config': {
                 'map_widget_height': settings.GEOPOSITION_MAP_WIDGET_HEIGHT,
@@ -42,7 +49,7 @@ class GeopositionWidget(forms.MultiWidget):
 
     class Media:
         js = (
-            '//maps.google.com/maps/api/js?sensor=false',
+            '//maps.google.com/maps/api/js?',
             'geoposition/geoposition.js',
         )
         css = {

@@ -16,64 +16,57 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: fields.py:12
-#, fuzzy
-#| msgid "A geoposition (latitude and longitude)"
 msgid "A geoposition field to store latitude, longitude and elevation data"
-msgstr "Координаты (широта и долгота)"
+msgstr ""
+"Un campo de geoposicionamiento para almacenar datos de latitud, longitud y "
+"elevación "
 
 #: forms.py:22
 #, python-format
 msgid "This value must be between %s and %s."
-msgstr ""
+msgstr "Este valor debe estar comprendido entre %s y %s."
 
 #: forms.py:24
 #, python-format
 msgid "This value must be at least %s."
-msgstr ""
+msgstr "Este valor no debe ser menor que %s."
 
 #: forms.py:26
 #, python-format
 msgid "This value must be no more than %s."
-msgstr ""
+msgstr "Este valor no debe ser mayor que %s."
 
 #: forms.py:49
-#, fuzzy
-#| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for latitude."
-msgstr "Введите корректные координаты."
+msgstr "Ingrese un valor válido para la latitud."
 
 #: forms.py:50
-#, fuzzy
-#| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for longitude."
-msgstr "Введите корректные координаты."
+msgstr "Ingrese un valor válido para la longitud."
 
 #: forms.py:51
-#, fuzzy
-#| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for elevation."
-msgstr "Введите корректные координаты."
+msgstr "Ingrese un valor válido para la elevación."
 
 #: forms.py:65 widgets.py:33
 msgid "latitude"
-msgstr "широта"
+msgstr "latitud"
 
 #: forms.py:72
 msgid "latitude must be a value between -90 and +90 degrees"
-msgstr ""
+msgstr "la latitud debe estas comprendida entre -90° y 90°"
 
 #: forms.py:77 widgets.py:37
 msgid "longitude"
-msgstr "долгота"
+msgstr "longitud"
 
 #: forms.py:84
 msgid "longitude must be a value between -180 and +180 degrees"
-msgstr ""
+msgstr "la latitud debe estas comprendida entre -180° y 180°"
 
 #: forms.py:89 widgets.py:41
 msgid "elevation"
-msgstr ""
+msgstr "elevación"

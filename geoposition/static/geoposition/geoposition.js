@@ -4,9 +4,7 @@ if (jQuery != undefined) {
     }
 }
 
-
 (function($) {
-
     $(document).ready(function() {
 
         try {
@@ -18,9 +16,9 @@ if (jQuery != undefined) {
 
         var mapDefaults = {
             'mapTypeId': google.maps.MapTypeId.ROADMAP,
-            'scrollwheel': false,
+            'scrollwheel': true,
             'streetViewControl': false,
-            'panControl': false
+            'panControl': true
         };
 
         var markerDefaults = {
@@ -30,14 +28,19 @@ if (jQuery != undefined) {
 
         $('.geoposition-widget').each(function() {
             var $container = $(this),
-                $mapContainer = $('<div class="geoposition-map" />'),
-                $addressRow = $('<div class="geoposition-address" />'),
-                $searchRow = $('<div class="geoposition-search" />'),
-                $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
+                $mapWrapper = $('<div class="geoposition-map-wrapper"/>'),
+                $mapContainer = $('<div class="geoposition-map"/>'),
+                $addressRow = $('<div class="geoposition-address"/>'),
+                $searchInput = $('<input>', {
+                    'type': 'search',
+                    'placeholder': 'Start typing an address …'
+                }),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
+                $elevationField = $container.find('input.geoposition:eq(2)'),
                 latitude = parseFloat($latitudeField.val()) || null,
                 longitude = parseFloat($longitudeField.val()) || null,
+                elevation = parseFloat($elevationField.val()) || null,
                 map,
                 mapLatLng,
                 mapOptions,
@@ -70,7 +73,9 @@ if (jQuery != undefined) {
                         if (results.length == 1) {
                             updatePosition(results[0]);
                         } else {
-                            var $ul = $('<ul />', {'class': 'geoposition-results'});
+                            var $ul = $('<ul />', {
+                                'class': 'geoposition-results'
+                            });
                             $.each(results, function(i, result) {
                                 var $li = $('<li />');
                                 $li.text(result.formatted_address);
@@ -109,18 +114,20 @@ if (jQuery != undefined) {
                 if (e.keyCode == 13) {
                     e.preventDefault();
                     doSearch();
-                }
-                else {
+                } else {
                     // otherwise, search after a while after typing ends
-                    autoSuggestTimer = setTimeout(function(){
+                    autoSuggestTimer = setTimeout(function() {
                         doSearch();
                     }, 1000);
                 }
             }).on('abort', function() {
                 $(this).parent().find('ul.geoposition-results').remove();
             });
-            $searchInput.appendTo($searchRow);
-            $container.append($searchRow, $mapContainer, $addressRow);
+            $searchInput.appendTo($mapWrapper);
+            $addressRow.appendTo($mapWrapper);
+            $mapContainer.appendTo($mapWrapper);
+
+            $container.append($mapWrapper);
 
             mapLatLng = new google.maps.LatLng(latitude, longitude);
 
@@ -144,11 +151,28 @@ if (jQuery != undefined) {
             }
 
             marker = new google.maps.Marker(markerOptions);
+            var elevator = new google.maps.ElevationService;
+
             google.maps.event.addListener(marker, 'dragend', function() {
                 $latitudeField.val(this.position.lat());
                 $longitudeField.val(this.position.lng());
+
+                elevator.getElevationForLocations({
+                    'locations':[{
+                        lat: this.position.lat(),
+                        lng: this.position.lng()
+                    }]
+                }, function(response, status){
+                    var elevation = 0.0;
+                    if(status==='OK'){
+                        elevation = response[0].elevation;
+                    }
+                    $elevationField.val(elevation);
+                });
+
                 doGeocode();
             });
+
             if ($latitudeField.val() && $longitudeField.val()) {
                 google.maps.event.trigger(marker, 'dragend');
             }
