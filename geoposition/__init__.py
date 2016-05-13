@@ -8,7 +8,7 @@ __version__ = '.'.join(map(str, VERSION))
 
 
 # Loads GeopositionConfig
-default_app_config = 'geoposition.apps.GeopositionConfig'
+# default_app_config = 'geoposition.apps.GeopositionConfig'
 
 
 # Geoposition object with optional elevation property
