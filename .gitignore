@@ -19,4 +19,5 @@ docs/_build/
 !MANIFEST.in
 !README.rst
 !setup.py
+!manage.py
 !tox.ini
