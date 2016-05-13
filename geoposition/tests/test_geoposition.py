@@ -5,6 +5,8 @@ from example.models import PointOfInterest
 
 
 class GeopositionTestCase(SimpleTestCase):
+    allow_database_queries = True
+
     def test_init_with_decimals(self):
         gp = Geoposition(Decimal('52.5'), Decimal('13.4'))
         self.assertEqual(gp.latitude, Decimal('52.5'))
