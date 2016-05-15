@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-19 14:13-0500\n"
+"POT-Creation-Date: 2016-05-14 15:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,55 +18,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: apps.py:7
+msgid "Geoposition"
+msgstr ""
+
 #: fields.py:12
 msgid "A geoposition field to store latitude, longitude and elevation data"
 msgstr ""
-"Un campo de geoposicionamiento para almacenar datos de latitud, longitud y "
-"elevación "
 
-#: forms.py:22
-#, python-format
-msgid "This value must be between %s and %s."
-msgstr "Este valor debe estar comprendido entre %s y %s."
+#: forms.py:12
+msgid "Enter a valid value for latitude."
+msgstr ""
 
-#: forms.py:24
-#, python-format
-msgid "This value must be at least %s."
-msgstr "Este valor no debe ser menor que %s."
+#: forms.py:13
+msgid "Enter a valid value for longitude."
+msgstr ""
 
-#: forms.py:26
-#, python-format
-msgid "This value must be no more than %s."
-msgstr "Este valor no debe ser mayor que %s."
+#: forms.py:14
+msgid "Enter a valid value for elevation."
+msgstr ""
+
+#: forms.py:30 widgets.py:38
+msgid "latitude"
+msgstr ""
+
+#: forms.py:37
+msgid "latitude must be a value between -90 and +90 degrees"
+msgstr ""
+
+#: forms.py:42 widgets.py:42
+msgid "longitude"
+msgstr ""
 
 #: forms.py:49
-msgid "Enter a valid value for latitude."
-msgstr "Ingrese un valor válido para la latitud."
-
-#: forms.py:50
-msgid "Enter a valid value for longitude."
-msgstr "Ingrese un valor válido para la longitud."
-
-#: forms.py:51
-msgid "Enter a valid value for elevation."
-msgstr "Ingrese un valor válido para la elevación."
-
-#: forms.py:65 widgets.py:33
-msgid "latitude"
-msgstr "latitud"
-
-#: forms.py:72
-msgid "latitude must be a value between -90 and +90 degrees"
-msgstr "la latitud debe estas comprendida entre -90° y 90°"
-
-#: forms.py:77 widgets.py:37
-msgid "longitude"
-msgstr "longitud"
-
-#: forms.py:84
 msgid "longitude must be a value between -180 and +180 degrees"
-msgstr "la latitud debe estas comprendida entre -180° y 180°"
+msgstr ""
 
-#: forms.py:89 widgets.py:41
+#: forms.py:54 widgets.py:46
 msgid "elevation"
-msgstr "elevación"
+msgstr ""
+
+#: validators.py:19
+#, python-format
+msgid "This value must be between %(lower)s and %(upper)s."
+msgstr ""
+
+#: validators.py:21
+#, python-format
+msgid "This value must be at least %(lower)s."
+msgstr ""
+
+#: validators.py:23
+#, python-format
+msgid "This value must be no more than %(upper)s."
+msgstr ""

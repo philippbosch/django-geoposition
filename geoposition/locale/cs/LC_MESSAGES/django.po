@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-19 14:13-0500\n"
+"POT-Creation-Date: 2016-05-14 15:16-0500\n"
 "PO-Revision-Date: 2014-06-24 19:13+0200\n"
 "Last-Translator: Filip Novák <filip.f.novak@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,61 +17,65 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.5\n"
 
+#: apps.py:7
+msgid "Geoposition"
+msgstr ""
+
 #: fields.py:12
 #, fuzzy
 #| msgid "A geoposition (latitude and longitude)"
 msgid "A geoposition field to store latitude, longitude and elevation data"
 msgstr "GPS souřadnice - zeměpisná šířka (latitude) a délka(longtitude)"
 
-#: forms.py:22
-#, python-format
-msgid "This value must be between %s and %s."
-msgstr ""
-
-#: forms.py:24
-#, python-format
-msgid "This value must be at least %s."
-msgstr ""
-
-#: forms.py:26
-#, python-format
-msgid "This value must be no more than %s."
-msgstr ""
-
-#: forms.py:49
+#: forms.py:12
 #, fuzzy
 #| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for latitude."
 msgstr "Zadejte platné GPS souřadnice"
 
-#: forms.py:50
+#: forms.py:13
 #, fuzzy
 #| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for longitude."
 msgstr "Zadejte platné GPS souřadnice"
 
-#: forms.py:51
+#: forms.py:14
 #, fuzzy
 #| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for elevation."
 msgstr "Zadejte platné GPS souřadnice"
 
-#: forms.py:65 widgets.py:33
+#: forms.py:30 widgets.py:38
 msgid "latitude"
 msgstr "zeměpisná šířka"
 
-#: forms.py:72
+#: forms.py:37
 msgid "latitude must be a value between -90 and +90 degrees"
 msgstr ""
 
-#: forms.py:77 widgets.py:37
+#: forms.py:42 widgets.py:42
 msgid "longitude"
 msgstr "Zeměpisná délka"
 
-#: forms.py:84
+#: forms.py:49
 msgid "longitude must be a value between -180 and +180 degrees"
 msgstr ""
 
-#: forms.py:89 widgets.py:41
+#: forms.py:54 widgets.py:46
 msgid "elevation"
+msgstr ""
+
+#: validators.py:19
+#, python-format
+msgid "This value must be between %(lower)s and %(upper)s."
+msgstr ""
+
+#: validators.py:21
+#, python-format
+msgid "This value must be at least %(lower)s."
+msgstr ""
+
+#: validators.py:23
+#, python-format
+msgid "This value must be no more than %(upper)s."
 msgstr ""

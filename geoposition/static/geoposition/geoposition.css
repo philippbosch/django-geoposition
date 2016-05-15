@@ -9,6 +9,13 @@ ul.geoposition-widget {
     overflow: hidden;
 }
 
+.aligned label + div {
+    padding: 6px 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 170px;
+}
+
 .geoposition-widget input.geoposition{
     margin-left: 5px;
     margin-bottom: 4px;

@@ -29,7 +29,7 @@ class Geoposition(object):
 
         self._latitude = Decimal(latitude)
         self._longitude = Decimal(longitude)
-        self._elevation = Decimal(elevation)
+        self._elevation = Decimal(elevation).quantize(Decimal('.001'))
 
     # The property 'use_elevation' is not editable
     @property

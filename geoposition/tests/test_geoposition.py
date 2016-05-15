@@ -12,27 +12,59 @@ class GeopositionTestCase(SimpleTestCase):
         self.assertEqual(gp.latitude, Decimal('52.5'))
         self.assertEqual(gp.longitude, Decimal('13.4'))
 
+    def test_init_elevation_with_decimals(self):
+        gp = Geoposition(Decimal('52.5'), Decimal('13.4'), Decimal('10.5'), use_elevation=True)
+        self.assertEqual(gp.latitude, Decimal('52.5'))
+        self.assertEqual(gp.longitude, Decimal('13.4'))
+        self.assertEqual(gp.elevation, Decimal('10.5'))
+
     def test_init_with_strs(self):
         gp = Geoposition('52.5', '13.4')
         self.assertEqual(gp.latitude, Decimal('52.5'))
         self.assertEqual(gp.longitude, Decimal('13.4'))
+
+    def test_init_elevation_with_strs(self):
+        gp = Geoposition('52.5', '13.4', '10.5', use_elevation=True)
+        self.assertEqual(gp.latitude, Decimal('52.5'))
+        self.assertEqual(gp.longitude, Decimal('13.4'))
+        self.assertEqual(gp.elevation, Decimal('10.5'))
 
     def test_init_with_floats(self):
         gp = Geoposition(52.5, 13.4)
         self.assertEqual(gp.latitude, Decimal('52.5'))
         self.assertEqual(gp.longitude, Decimal('13.4'))
 
+    def test_init_elevation_with_floats(self):
+        gp = Geoposition(52.5, 13.4, 10.5, use_elevation=True)
+        self.assertEqual(gp.latitude, Decimal('52.5'))
+        self.assertEqual(gp.longitude, Decimal('13.4'))
+        self.assertEqual(gp.elevation, Decimal('10.5'))
+
     def test_repr(self):
         gp = Geoposition(52.5, 13.4)
         self.assertEqual(repr(gp), 'Geoposition(52.5,13.4)')
+
+    def test_elevation_repr(self):
+        gp = Geoposition(52.5, 13.4, 10.5, use_elevation=True)
+        # Elevations is alwais rounded to 3 decimal places
+        self.assertEqual(repr(gp), 'Geoposition(52.5,13.4,10.500)')
 
     def test_len(self):
         gp = Geoposition(52.5, 13.4)
         self.assertEqual(len(gp), 9)
 
+    def test_elevation_len(self):
+        gp = Geoposition(52.5, 13.4, 10.5, use_elevation=True)
+        self.assertEqual(len(gp), 16)
+
     def test_equality(self):
         gp1 = Geoposition(52.5, 13.4)
         gp2 = Geoposition(52.5, 13.4)
+        self.assertEqual(gp1, gp2)
+
+    def test_elevation_equality(self):
+        gp1 = Geoposition(52.5, 13.4, 10.5)
+        gp2 = Geoposition(52.5, 13.4, 10.5)
         self.assertEqual(gp1, gp2)
 
     def test_inequality(self):
@@ -40,8 +72,18 @@ class GeopositionTestCase(SimpleTestCase):
         gp2 = Geoposition(52.4, 13.1)
         self.assertNotEqual(gp1, gp2)
 
+    def test_elevation_inequality(self):
+        gp1 = Geoposition(52.5, 13.4, 10.5)
+        gp2 = Geoposition(52.4, 13.1, 10.5)
+        self.assertNotEqual(gp1, gp2)
+
     def test_equality_with_none(self):
         gp1 = Geoposition(52.5, 13.4)
+        gp2 = None
+        self.assertFalse(gp1 == gp2)
+
+    def test_equality_elevation_with_none(self):
+        gp1 = Geoposition(52.5, 13.4, 10.5, use_elevation=True)
         gp2 = None
         self.assertFalse(gp1 == gp2)
 
@@ -50,7 +92,29 @@ class GeopositionTestCase(SimpleTestCase):
         gp2 = None
         self.assertTrue(gp1 != gp2)
 
+    def test_inequality_elevation_with_none(self):
+        gp1 = Geoposition(52.5, 13.4, 10.5, use_elevation=True)
+        gp2 = None
+        self.assertTrue(gp1 != gp2)
+
     def test_db_value_to_python_object(self):
-        obj = PointOfInterest.objects.create(name='Foo', address='some where', city='city', zipcode='12345', position=Geoposition(52.5,13.4))
+        obj = PointOfInterest.objects.create(
+            name='Foo',
+            address='some where',
+            city='city',
+            zipcode='12345',
+            position=Geoposition(52.5, 13.4)
+        )
+        poi = PointOfInterest.objects.get(id=obj.id)
+        self.assertIsInstance(poi.position, Geoposition)
+
+    def test_elevation_db_value_to_python_object(self):
+        obj = PointOfInterest.objects.create(
+            name='Foo',
+            address='some where',
+            city='city',
+            zipcode='12345',
+            position=Geoposition(52.5, 13.4, 10.5, use_elevation=True)
+        )
         poi = PointOfInterest.objects.get(id=obj.id)
         self.assertIsInstance(poi.position, Geoposition)

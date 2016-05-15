@@ -2,46 +2,8 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.core.exceptions import ValidationError
-from django.utils.deconstruct import deconstructible
-
-from .widgets import GeopositionWidget
-
-
-@deconstructible
-class NumberIsInRangeValidator(object):
-
-    """
-    Validator that tests if a value is in a range (inclusive).
-    """
-
-    def __init__(self, lower=None, upper=None, error_message=None):
-        self.lower, self.upper = lower, upper
-        if error_message is None or not error_message:
-            if lower and upper:
-                self.error_message = _("This value must be between %s and %s.") % (lower, upper)
-            elif lower:
-                self.error_message = _("This value must be at least %s.") % lower
-            elif upper:
-                self.error_message = _("This value must be no more than %s.") % upper
-        else:
-            self.error_message = error_message
-
-    def __call__(self, field_data):
-        # Try to make the value numeric. If this fails, we assume another
-        # validator will catch the problem.
-        try:
-            val = float(field_data)
-        except ValueError:
-            return
-
-        # Now validate
-        if self.lower and self.upper and (val < self.lower or val > self.upper):
-            raise ValidationError(self.error_message)
-        elif self.lower and val < self.lower:
-            raise ValidationError(self.error_message)
-        elif self.upper and val > self.upper:
-            raise ValidationError(self.error_message)
+from geoposition.validators import NumberIsInRangeValidator
+from geoposition.widgets import GeopositionWidget
 
 
 class GeopositionField(forms.MultiValueField):
@@ -52,7 +14,20 @@ class GeopositionField(forms.MultiValueField):
     }
 
     def __init__(self, *args, **kwargs):
-        self.widget = GeopositionWidget()
+        kwargs['required'] = kwargs.get('required', True)
+
+        self._use_elevation = kwargs.get('use_elevation', False)
+
+        if 'use_elevation' in kwargs:
+            del kwargs['use_elevation']
+
+        attrs = dict(
+            required=True,
+            use_elevation=self._use_elevation
+        )
+
+        self.widget = GeopositionWidget(attrs=attrs)
+
         errors = self.default_error_messages.copy()
 
         if 'error_messages' in kwargs:
@@ -61,8 +36,9 @@ class GeopositionField(forms.MultiValueField):
         localize = kwargs.get('localize', False)
 
         fields = (
-            forms.FloatField(
+            forms.DecimalField(
                 label=_('latitude'),
+                required=kwargs.get('required', True),
                 error_messages={'invalid': errors['invalid_latitude']},
                 localize=localize,
                 validators=[
@@ -73,8 +49,9 @@ class GeopositionField(forms.MultiValueField):
                     )
                 ]
             ),
-            forms.FloatField(
+            forms.DecimalField(
                 label=_('longitude'),
+                required=kwargs.get('required', True),
                 error_messages={'invalid': errors['invalid_longitude']},
                 localize=localize,
                 validators=[
@@ -85,17 +62,24 @@ class GeopositionField(forms.MultiValueField):
                     ),
                 ]
             ),
-            forms.FloatField(
+            forms.DecimalField(
                 label=_('elevation'),
+                required=kwargs.get('required', True) and self.use_elevation,
                 error_messages={'invalid': errors['invalid_elevation']},
-                localize=localize
+                localize=localize,
             ),
         )
+
         super(GeopositionField, self).__init__(fields, **kwargs)
+
+    @property
+    def use_elevation(self):
+        return self._use_elevation
 
     def widget_attrs(self, widget):
         classes = widget.attrs.get('class', '').split()
         classes.append('geoposition')
+
         return {'class': ' '.join(classes)}
 
     def compress(self, value_list):
