@@ -51,6 +51,7 @@ if (jQuery != undefined) {
 
             $mapContainer.css('height', $container.data('map-widget-height') + 'px');
             mapCustomOptions = $container.data('map-options') || {};
+            mapType = $container.data('map-type') || "ROADMAP";
             markerCustomOptions = $container.data('marker-options') || {};
 
             function doSearch() {
@@ -93,6 +94,7 @@ if (jQuery != undefined) {
 
             function doGeocode() {
                 var gc = new google.maps.Geocoder();
+
                 gc.geocode({
                     'latLng': marker.position
                 }, function(results, status) {
@@ -142,6 +144,8 @@ if (jQuery != undefined) {
             }
 
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
+            map.setMapTypeId(google.maps.MapTypeId[mapType]);
+
             markerOptions = $.extend({}, markerDefaults, markerCustomOptions, {
                 'map': map
             });
@@ -184,6 +188,20 @@ if (jQuery != undefined) {
                 map.setCenter(center);
                 map.setZoom(15);
                 marker.setPosition(center);
+
+                elevator.getElevationForLocations({
+                    'locations':[{
+                        lat: latitude,
+                        lng: longitude
+                    }]
+                }, function(response, status){
+                    var elevation = 0.0;
+                    if(status==='OK'){
+                        elevation = response[0].elevation;
+                    }
+                    $elevationField.val(elevation);
+                });
+
                 doGeocode();
             });
         });

@@ -61,6 +61,7 @@ class GeopositionWidget(forms.MultiWidget):
             },
             'config': {
                 'map_widget_height': settings.GEOPOSITION_MAP_WIDGET_HEIGHT,
+                'map_type': settings.GEOPOSITION_MAP_TYPE,
                 'map_options': json.dumps(settings.GEOPOSITION_MAP_OPTIONS),
                 'marker_options': json.dumps(settings.GEOPOSITION_MARKER_OPTIONS),
             }
