@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import smart_text
-from django import forms
-from django.utils.text import capfirst
 
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
@@ -59,15 +57,12 @@ class GeopositionField(models.Field):
 
     def to_python(self, value):
         if not value or value == 'None':
-            print('*** Convert from None')
             return None
 
         if isinstance(value, Geoposition):
-            print('*** Convert from Geoposition')
             return value
 
         if isinstance(value, list):
-            print('*** Convert from List')
             if self.use_elevation:
                 return Geoposition(latitude=value[0],
                                    longitude=value[1],
@@ -81,7 +76,6 @@ class GeopositionField(models.Field):
 
         # default case is string
         value_parts = value.rsplit(',')
-        print('*** Convert from String')
 
         try:
             latitude = value_parts[0]
