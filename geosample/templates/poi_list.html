@@ -37,15 +37,19 @@
                             <div class="divider"></div>
                         </h1>
                     </div>
-                    <div class="col s12 m4">
+                    <div class="col s12 m7">
+                        <div id="map-canvas" class="card-panel"></div>
+                    </div>
+                    <div class="col s12 m5">
                         <div id="poi-list">
                             {% for poi in pois %}
-                            <div class="card-panel">
+                            <div class="card-panel z-depth-0 transparent">
                                 <ul class="poi-list text-light">
                                     <li class="title">
                                         <i class="material-icons">place</i>
                                         {{ poi.name }}
                                     </li>
+                                    <li class="item divider"></li>
                                     <li class="item">
                                         <strong>Address:</strong>
                                         {{ poi.address }}
@@ -80,13 +84,16 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="col s12 m8">
-                        <div id="map-canvas" class="card-panel"></div>
-                    </div>
                 </div>
             </div>
         </main>
-
+        <footer class="page-footer green">
+            <div class="footer-copyright">
+                <div class="container center light">
+                    © 2016 Django Geoposition
+                </div>
+            </div>
+        </footer>
 
         <script type="text/javascript" charset="utf-8" src="static/js/jquery.js"></script>
         <script type="text/javascript" charset="utf-8" src="static/js/materialize.js"></script>
