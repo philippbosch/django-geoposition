@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 15:16-0500\n"
+"POT-Creation-Date: 2016-05-16 13:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,55 +20,56 @@ msgstr ""
 
 #: apps.py:7
 msgid "Geoposition"
-msgstr ""
+msgstr "Geoposición"
 
 #: fields.py:12
 msgid "A geoposition field to store latitude, longitude and elevation data"
 msgstr ""
+"Campo de geoposición para almecenar datos de latitud, longitud y elevación"
+
+#: forms.py:11
+msgid "Enter a valid value for latitude."
+msgstr "Ingrese un valor adecuado para la latitud."
 
 #: forms.py:12
-msgid "Enter a valid value for latitude."
-msgstr ""
+msgid "Enter a valid value for longitude."
+msgstr "Ingrese un valor adecuado para la longitud."
 
 #: forms.py:13
-msgid "Enter a valid value for longitude."
-msgstr ""
-
-#: forms.py:14
 msgid "Enter a valid value for elevation."
-msgstr ""
+msgstr "Ingrese un valor adecuado para la elevación."
 
-#: forms.py:30 widgets.py:38
+#: forms.py:40 widgets.py:48
 msgid "latitude"
-msgstr ""
+msgstr "latitud"
 
-#: forms.py:37
+#: forms.py:48
 msgid "latitude must be a value between -90 and +90 degrees"
-msgstr ""
+msgstr "la latitud debe estar comprendida entre 90 y -90 grados"
 
-#: forms.py:42 widgets.py:42
+#: forms.py:53 widgets.py:53
 msgid "longitude"
-msgstr ""
+msgstr "longitud"
 
-#: forms.py:49
+#: forms.py:61
 msgid "longitude must be a value between -180 and +180 degrees"
-msgstr ""
+msgstr "la longitud debe estar comprendida entre -180 y 180 grados"
 
-#: forms.py:54 widgets.py:46
+#: forms.py:66 widgets.py:58
 msgid "elevation"
-msgstr ""
-
-#: validators.py:19
-#, python-format
-msgid "This value must be between %(lower)s and %(upper)s."
-msgstr ""
+msgstr "elevación"
 
 #: validators.py:21
 #, python-format
-msgid "This value must be at least %(lower)s."
-msgstr ""
+msgid "This value must be between %(lower)s and %(upper)s."
+msgstr "Este valor debe estar comprendido entre %(lower)s y %(upper)s."
 
 #: validators.py:23
 #, python-format
+msgid "This value must be at least %(lower)s."
+msgstr "Este no debe ser menor que %(lower)s."
+
+#: validators.py:25
+#, python-format
 msgid "This value must be no more than %(upper)s."
-msgstr ""
+msgstr "Este valor no debe ser mayor que %(upper)s."

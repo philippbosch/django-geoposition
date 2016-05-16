@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 15:16-0500\n"
+"POT-Creation-Date: 2016-05-16 13:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,55 +29,55 @@ msgstr ""
 msgid "A geoposition field to store latitude, longitude and elevation data"
 msgstr "Координаты (широта и долгота)"
 
-#: forms.py:12
+#: forms.py:11
 #, fuzzy
 #| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for latitude."
 msgstr "Введите корректные координаты."
 
-#: forms.py:13
+#: forms.py:12
 #, fuzzy
 #| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for longitude."
 msgstr "Введите корректные координаты."
 
-#: forms.py:14
+#: forms.py:13
 #, fuzzy
 #| msgid "Enter a valid geoposition."
 msgid "Enter a valid value for elevation."
 msgstr "Введите корректные координаты."
 
-#: forms.py:30 widgets.py:38
+#: forms.py:40 widgets.py:48
 msgid "latitude"
 msgstr "широта"
 
-#: forms.py:37
+#: forms.py:48
 msgid "latitude must be a value between -90 and +90 degrees"
 msgstr ""
 
-#: forms.py:42 widgets.py:42
+#: forms.py:53 widgets.py:53
 msgid "longitude"
 msgstr "долгота"
 
-#: forms.py:49
+#: forms.py:61
 msgid "longitude must be a value between -180 and +180 degrees"
 msgstr ""
 
-#: forms.py:54 widgets.py:46
+#: forms.py:66 widgets.py:58
 msgid "elevation"
-msgstr ""
-
-#: validators.py:19
-#, python-format
-msgid "This value must be between %(lower)s and %(upper)s."
 msgstr ""
 
 #: validators.py:21
 #, python-format
-msgid "This value must be at least %(lower)s."
+msgid "This value must be between %(lower)s and %(upper)s."
 msgstr ""
 
 #: validators.py:23
+#, python-format
+msgid "This value must be at least %(lower)s."
+msgstr ""
+
+#: validators.py:25
 #, python-format
 msgid "This value must be no more than %(upper)s."
 msgstr ""
