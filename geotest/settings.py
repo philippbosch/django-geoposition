@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'geoposition',
-    'example',
+    'geosample',
 
     'django.contrib.admin',
     'django.contrib.auth',

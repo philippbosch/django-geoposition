@@ -3,7 +3,11 @@ from .models import PointOfInterest
 
 
 class PointOfInterestAdmin(admin.ModelAdmin):
-    list_display = ('name', 'position', 'position_map',)
+    list_display = (
+        'name',
+        'position',
+        'position_map',
+    )
 
     def position_map(self, instance):
         if instance.position is not None:
@@ -15,6 +19,7 @@ class PointOfInterestAdmin(admin.ModelAdmin):
                 'height': 100,
                 'scale': 2
             }
+
     position_map.allow_tags = True
 
 
