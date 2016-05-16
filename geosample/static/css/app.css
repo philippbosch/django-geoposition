@@ -1,0 +1,67 @@
+.text-thin {
+    font-weight: 100;
+}
+
+.text-light {
+    font-weight: 300;
+}
+
+nav ul {
+    overflow: hidden;
+}
+
+.card-panel {
+    padding: 15px;
+}
+
+.poi-list .title {
+    font-size: 2.0rem;
+    line-height: 2.5rem;
+    height: 2.5rem;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.poi-list .title i{
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: 2.0rem;
+    line-height: 2.5rem;
+    vertical-align: middle;
+    height: 2.5rem;
+    width: 2.5rem;
+    overflow: hidden;
+}
+
+.poi-list .item {
+    margin-left: 2.5rem;
+}
+
+.poi-list .divider {
+    margin: 5px 0 5px 2.5rem;
+}
+
+.poi-list:first-child {
+    margin-top: 0;
+}
+
+.poi-list:last-child {
+    margin-bottom: 0;
+}
+li>ul {
+    margin-left: 15px;
+}
+@media only screen and (min-width: 601px) {
+    nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+        height: 64px;
+        line-height: 64px;
+    }
+
+}
+
+#poi-list,
+#map-canvas {
+    height: 600px;
+    overflow: auto;
+}

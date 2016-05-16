@@ -1,12 +1,19 @@
-<div class="geoposition-widget" data-map-widget-height="{{ config.map_widget_height }}" data-map-options="{{ config.map_options }}" data-marker-options="{{ config.marker_options }}">
-    <table>
-        <tr>
-            <td>{{ latitude.label|capfirst }}</td>
-            <td>{{ latitude.html }}</td>
-        </tr>
-        <tr>
-            <td>{{ longitude.label|capfirst }}</td>
-            <td>{{ longitude.html }}</td>
-        </tr>
-    </table>
+<div
+    class="geoposition-widget"
+    data-map-widget-height="{{ config.map_widget_height }}"
+    data-map-type="{{ config.map_type }}"
+    data-map-options="{{ config.map_options }}"
+    data-marker-options="{{ config.marker_options }}">
+    <div>
+        <label class="{{ latitude.required }}">{{ latitude.label|capfirst }}:</label>
+        {{ latitude.html }}
+    </div>
+    <div>
+        <label class="{{ latitude.required }}">{{longitude.label|capfirst}}:</label>
+        {{ longitude.html }}
+    </div>
+    <div class="{{ elevation.hidden }}">
+        <label class="{{ elevation.required }}">{{elevation.label|capfirst}}:</label>
+        {{ elevation.html }}
+    </div>
 </div>

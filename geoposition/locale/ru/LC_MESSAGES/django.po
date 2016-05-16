@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-29 21:45+0300\n"
+"POT-Creation-Date: 2016-05-16 13:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: fields.py:10
-msgid "A geoposition (latitude and longitude)"
+#: apps.py:7
+msgid "Geoposition"
+msgstr ""
+
+#: fields.py:12
+#, fuzzy
+#| msgid "A geoposition (latitude and longitude)"
+msgid "A geoposition field to store latitude, longitude and elevation data"
 msgstr "Координаты (широта и долгота)"
 
-#: forms.py:8
-msgid "Enter a valid geoposition."
+#: forms.py:11
+#, fuzzy
+#| msgid "Enter a valid geoposition."
+msgid "Enter a valid value for latitude."
 msgstr "Введите корректные координаты."
 
-#: forms.py:14 widgets.py:22
+#: forms.py:12
+#, fuzzy
+#| msgid "Enter a valid geoposition."
+msgid "Enter a valid value for longitude."
+msgstr "Введите корректные координаты."
+
+#: forms.py:13
+#, fuzzy
+#| msgid "Enter a valid geoposition."
+msgid "Enter a valid value for elevation."
+msgstr "Введите корректные координаты."
+
+#: forms.py:40 widgets.py:48
 msgid "latitude"
 msgstr "широта"
 
-#: forms.py:15 widgets.py:26
+#: forms.py:48
+msgid "latitude must be a value between -90 and +90 degrees"
+msgstr ""
+
+#: forms.py:53 widgets.py:53
 msgid "longitude"
 msgstr "долгота"
+
+#: forms.py:61
+msgid "longitude must be a value between -180 and +180 degrees"
+msgstr ""
+
+#: forms.py:66 widgets.py:58
+msgid "elevation"
+msgstr ""
+
+#: validators.py:21
+#, python-format
+msgid "This value must be between %(lower)s and %(upper)s."
+msgstr ""
+
+#: validators.py:23
+#, python-format
+msgid "This value must be at least %(lower)s."
+msgstr ""
+
+#: validators.py:25
+#, python-format
+msgid "This value must be no more than %(upper)s."
+msgstr ""

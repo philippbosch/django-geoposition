@@ -1,48 +1,64 @@
-.geoposition-widget {
+*:focus{
+    outline: none!important;
+}
+
+p.geoposition-widget,
+table.geoposition-widget,
+ol.geoposition-widget
+ul.geoposition-widget {
     overflow: hidden;
 }
 
-.geoposition-map {
+.aligned label + div {
+    padding: 6px 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 170px;
+}
+
+.geoposition-widget input.geoposition{
+    margin-left: 5px;
+    margin-bottom: 4px;
+}
+
+.geoposition-map-wrapper {
     position: relative;
+    border-radius: 5px;
     margin: 6px 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.geoposition-map-wrapper .geoposition-map {
+    position: relative;
     clear: both;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top: 1px solid #ccc;
 }
 
-.geoposition-widget table {
-    float: left;
+.geoposition-map-wrapper input[type=search]{
     border: 0;
-    margin-bottom: 8px;
-}
-
-.geoposition-widget td {
-    border: 0;
-    padding: 0;
-    padding-right: 5px;
-    vertical-align: middle;
-}
-
-.geoposition-search {
-    width: 30%;
-}
-
-.geoposition-search input {
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 5px 6px;
+    margin-top: 0;
     width: 100%;
+    margin: 0;
 }
+
 
 .geoposition-address {
-    float: left;
     text-align: left;
-}
-
-.geoposition-search {
-    float: right;
-    text-align: left;
+    padding: 5.5px 8px;
 }
 
 .geoposition-results {
     position: absolute;
     z-index: 1;
-    margin: 4px 0 0 0 !important;
+    margin: 0!important;
     padding: 0 !important;
     background: white;
     border: 1px solid #eee;
@@ -54,17 +70,15 @@
 .geoposition-results li {
     list-style: none;
     padding: 4px 8px;
-    border-top: 1px dotted #eee;
+    border-top: 1px solid #eee;
     cursor: pointer;
+    width: 100%;
 }
 
 .geoposition-results li:hover {
     background-color: #eee;
 }
+
 .geoposition-results li:first-child {
     border-top: 0;
-}
-
-.gmnoprint img {
-    max-width: none; 
 }

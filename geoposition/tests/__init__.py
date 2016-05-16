@@ -1,1 +1,1 @@
-from .test_geoposition import GeopositionTestCase
+from geoposition.tests.test_geoposition import GeopositionTestCase
