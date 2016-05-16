@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django.test import SimpleTestCase
 from geoposition import Geoposition
-from example.models import PointOfInterest
+from geosample.models import PointOfInterest
 
 
 class GeopositionTestCase(SimpleTestCase):
