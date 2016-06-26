@@ -41,17 +41,7 @@ class GeopositionField(models.Field):
         return Geoposition(latitude, longitude)
 
     def from_db_value(self, value, expression, connection, context):
-        value_parts = value.split(",")
-        try:
-            latitude = value_parts[0]
-        except IndexError:
-            latitude = '0.0'
-        try:
-            longitude = value_parts[1]
-        except IndexError:
-            longitude = '0.0'
-
-        return Geoposition(latitude, longitude)
+        return self.to_python(value)
 
     def get_prep_value(self, value):
         return str(value)
