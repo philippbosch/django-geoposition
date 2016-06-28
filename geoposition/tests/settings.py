@@ -1,4 +1,5 @@
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = '+*mac$-+vop%1#8zp%)blgacvst%fm)p$&u#p!5(x5nv9c0955'

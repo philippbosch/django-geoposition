@@ -1,10 +1,10 @@
 from __future__ import unicode_literals
-
 from decimal import Decimal
+
+default_app_config = 'geoposition.apps.GeoPositionConfig'
 
 VERSION = (0, 2, 2)
 __version__ = '.'.join(map(str, VERSION))
-
 
 class Geoposition(object):
     def __init__(self, latitude, longitude):
