@@ -34,15 +34,15 @@ class GeopositionWidget(forms.MultiWidget):
                 'label': _("longitude"),
             },
             'config': {
-                'map_widget_height': settings.GEOPOSITION_MAP_WIDGET_HEIGHT,
-                'map_options': json.dumps(settings.GEOPOSITION_MAP_OPTIONS),
-                'marker_options': json.dumps(settings.GEOPOSITION_MARKER_OPTIONS),
+                'map_widget_height': settings.MAP_WIDGET_HEIGHT or 500,
+                'map_options': json.dumps(settings.MAP_OPTIONS),
+                'marker_options': json.dumps(settings.MARKER_OPTIONS),
             }
         })
 
     class Media:
         js = (
-            '//maps.google.com/maps/api/js?key=%s&sensor=false' % settings.GEOPOSITION_MAP_API_KEY,
+            '//maps.google.com/maps/api/js?key=%s' % settings.GOOGLE_MAPS_API_KEY,
             'geoposition/geoposition.js',
         )
         css = {

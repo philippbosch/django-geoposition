@@ -24,6 +24,5 @@ setup(
       'Operating System :: OS Independent',
       'Programming Language :: Python',
       'Framework :: Django',
-    ],
-    install_requires=['django-appconf >= 0.4'],
+    ]
 )
