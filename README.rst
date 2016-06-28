@@ -36,6 +36,12 @@ Installation
         "geoposition",
     )
 
+- Set your Google API key in you settings file::
+
+    GEOPOSITION_MAP_API_KEY = 'YOUR_API_KEY'
+
+  API keys may be obtained here: https://developers.google.com/maps/documentation/javascript/get-api-key
+
 - If you are still using Django <1.3, you are advised to install
   `django-staticfiles`_ for static file serving.
 
