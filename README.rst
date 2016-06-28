@@ -4,12 +4,15 @@ django-geoposition
 
 A model field that can hold a geoposition (latitude/longitude), and corresponding admin/form widget.
 
-.. image:: https://pypip.in/v/django-geoposition/badge.png
-   :target: https://pypi.python.org/pypi/django-geoposition
+.. image:: https://badge.fury.io/py/django-geoposition.svg
+   :target: https://badge.fury.io/py/django-geoposition
 
 .. image:: https://travis-ci.org/philippbosch/django-geoposition.png?branch=master
    :target: https://travis-ci.org/philippbosch/django-geoposition
 
+.. image:: https://badges.gitter.im/philippbosch/django-geoposition.svg
+   :alt: Join the chat at https://gitter.im/philippbosch/django-geoposition
+   :target: https://gitter.im/philippbosch/django-geoposition?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 Prerequisites
 -------------
@@ -143,8 +146,3 @@ License
 .. _MapOptions: https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions
 .. _MarkerOptions: https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions
 .. _Lat/Lng Object Literals: https://developers.google.com/maps/documentation/javascript/examples/map-latlng-literal
-
-
-.. image:: https://badges.gitter.im/philippbosch/django-geoposition.svg
-   :alt: Join the chat at https://gitter.im/philippbosch/django-geoposition
-   :target: https://gitter.im/philippbosch/django-geoposition?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
