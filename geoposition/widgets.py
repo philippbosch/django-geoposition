@@ -21,7 +21,7 @@ class GeopositionWidget(forms.MultiWidget):
             return value.rsplit(',')
         if value:
             return [value.latitude, value.longitude]
-        return [None,None]
+        return [None, None]
 
     def format_output(self, rendered_widgets):
         return render_to_string('geoposition/widgets/geoposition.html', {
