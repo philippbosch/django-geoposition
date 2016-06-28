@@ -143,3 +143,8 @@ License
 .. _MapOptions: https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions
 .. _MarkerOptions: https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions
 .. _Lat/Lng Object Literals: https://developers.google.com/maps/documentation/javascript/examples/map-latlng-literal
+
+
+.. image:: https://badges.gitter.im/philippbosch/django-geoposition.svg
+   :alt: Join the chat at https://gitter.im/philippbosch/django-geoposition
+   :target: https://gitter.im/philippbosch/django-geoposition?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
