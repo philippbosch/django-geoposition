@@ -35,7 +35,7 @@ Installation
 
 - Set your Google API key in you settings file::
 
-    GEOPOSITION_MAP_API_KEY = 'YOU_API_KEY'
+    GEOPOSITION_MAP_API_KEY = 'YOUR_API_KEY'
 
   API keys may be obtained here: https://developers.google.com/maps/documentation/javascript/get-api-key
 
