@@ -9,8 +9,8 @@ env:
   - DJANGO=1.9
   - DJANGO=1.10b1
 install:
-  - pip install -q Django==$DJANGO --use-mirrors
-  - pip install . --use-mirrors
+  - pip install -q Django==$DJANGO
+  - pip install .
 script:
   - python manage.py test geoposition
 matrix:

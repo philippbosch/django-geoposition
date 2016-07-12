@@ -17,13 +17,12 @@ setup(
         ],
     },
     classifiers=[
-      'Development Status :: 4 - Beta',
-      'Environment :: Web Environment',
-      'Intended Audience :: Developers',
-      'License :: OSI Approved :: BSD License',
-      'Operating System :: OS Independent',
-      'Programming Language :: Python',
-      'Framework :: Django',
-    ],
-    install_requires=['django-appconf >= 0.4'],
+        'Development Status :: 4 - Beta',
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Framework :: Django',
+    ]
 )

@@ -49,6 +49,6 @@ class GeopositionTestCase(TestCase):
         self.assertTrue(gp1 != gp2)
 
     def test_db_value_to_python_object(self):
-        obj = PointOfInterest.objects.create(name='Foo', address='some where', city='city', zipcode='12345', position=Geoposition(52.5,13.4))
+        obj = PointOfInterest.objects.create(name='Foo', address='some where', city='city', zipcode='12345', position=Geoposition(52.5, 13.4))
         poi = PointOfInterest.objects.get(id=obj.id)
         self.assertIsInstance(poi.position, Geoposition)
