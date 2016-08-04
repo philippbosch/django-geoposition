@@ -4,12 +4,13 @@ from django.db import models
 from django.utils.six import with_metaclass
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import smart_text
+from django.db.models import TextField
 
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
 
 
-class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
+class GeopositionField(TextField):
     description = _("A geoposition (latitude and longitude)")
 
     def __init__(self, *args, **kwargs):
