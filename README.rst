@@ -9,7 +9,7 @@ A model field that can hold a geoposition (latitude/longitude), and correspondin
 
 .. image:: https://travis-ci.org/philippbosch/django-geoposition.svg?branch=master
    :target: https://travis-ci.org/philippbosch/django-geoposition
-    
+
 .. image:: https://badges.gitter.im/philippbosch/django-geoposition.svg
    :alt: Join the chat at https://gitter.im/philippbosch/django-geoposition
    :target: https://gitter.im/philippbosch/django-geoposition?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
@@ -17,8 +17,9 @@ A model field that can hold a geoposition (latitude/longitude), and correspondin
 Prerequisites
 -------------
 
-Starting with version 0.2, django-geoposition requires Django 1.4.10 or greater. If you need to support
-Django versions prior to 1.4.10, please use django-geoposition 0.1.5.
+Starting with version 0.3, django-geoposition requires Django 1.8 or greater.
+If you need to support Django versions prior to 1.8 please use django-geoposition 0.2.3.
+For Django versions prior to 1.4.10 please use django-geoposition 0.1.5.
 
 
 Installation
