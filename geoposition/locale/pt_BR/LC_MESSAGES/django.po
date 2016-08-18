@@ -1,0 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-06 10:49-0300\n"
+"PO-Revision-Date: 2015-05-06 10:49-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.7.6\n"
+
+#: .\fields.py:13
+msgid "A geoposition (latitude and longitude)"
+msgstr "Uma geolocalização (latitude e longitude)"
+
+#: .\forms.py:12
+msgid "Enter a valid geoposition."
+msgstr "Insira uma geolocalização válida."
+
+#: .\forms.py:18 .\widgets.py:30
+msgid "latitude"
+msgstr ""
+
+#: .\forms.py:19 .\widgets.py:34
+msgid "longitude"
+msgstr ""
