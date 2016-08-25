@@ -98,6 +98,10 @@ if (jQuery != undefined) {
                 });
             }
 
+            function isNotSet() {
+                return latitude === null && longitude === null;
+            }
+
             var autoSuggestTimer = null;
             $searchInput.bind('keydown', function(e) {
                 if (autoSuggestTimer) {
@@ -126,7 +130,7 @@ if (jQuery != undefined) {
 
             mapOptions = $.extend({}, mapDefaults, mapCustomOptions);
 
-            if (!(latitude === null && longitude === null && mapOptions['center'])) {
+            if (!(isNotSet() && mapOptions['center'])) {
                 mapOptions['center'] = mapLatLng;
             }
 
@@ -139,7 +143,7 @@ if (jQuery != undefined) {
                 'map': map
             });
 
-            if (!(latitude === null && longitude === null && markerOptions['position'])) {
+            if (!(isNotSet() && markerOptions['position'])) {
                 markerOptions['position'] = mapLatLng;
             }
 
@@ -162,6 +166,25 @@ if (jQuery != undefined) {
                 marker.setPosition(center);
                 doGeocode();
             });
+            // If there is no value yet, try to read from current location
+            if(isNotSet()) {
+                if(mapOptions['center_on_current'] || markerOptions['position_on_current']) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        // Try catch in case position was not found
+                        try {
+                            var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        }catch(e){
+                            return;
+                        }
+                        if(mapOptions['center_on_current']){
+                            map.setCenter(center);
+                        }
+                        if(markerOptions['position_on_current']){
+                            marker.setPosition(center);
+                        }
+                    });
+                }
+            }
         });
     });
 })(django.jQuery);
