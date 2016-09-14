@@ -9,6 +9,26 @@ from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
 
 
+class CastOnAssignDescriptor(object):
+    """
+    A property descriptor which ensures that `field.to_python()` is called on _every_ assignment to the field.
+
+    This used to be provided by the `django.db.models.subclassing.Creator` class, which in turn
+    was used by the deprecated-in-Django-1.10 `SubfieldBase` class, hence the reimplementation here.
+    """
+
+    def __init__(self, field):
+        self.field = field
+
+    def __get__(self, obj, type=None):
+        if obj is None:
+            return self
+        return obj.__dict__[self.field.name]
+
+    def __set__(self, obj, value):
+        obj.__dict__[self.field.name] = self.field.to_python(value)
+
+
 class GeopositionField(models.Field):
     description = _("A geoposition (latitude and longitude)")
 
@@ -39,6 +59,10 @@ class GeopositionField(models.Field):
             longitude = '0.0'
 
         return Geoposition(latitude, longitude)
+
+    def contribute_to_class(self, cls, name):
+        super(GeopositionField, self).contribute_to_class(cls, name)
+        setattr(cls, name, CastOnAssignDescriptor(self))
 
     def from_db_value(self, value, expression, connection, context):
         return self.to_python(value)

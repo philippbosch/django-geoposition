@@ -52,3 +52,7 @@ class GeopositionTestCase(TestCase):
         obj = PointOfInterest.objects.create(name='Foo', address='some where', city='city', zipcode='12345', position=Geoposition(52.5, 13.4))
         poi = PointOfInterest.objects.get(id=obj.id)
         self.assertIsInstance(poi.position, Geoposition)
+
+    def test_value_conversion_on_assignment(self):
+        obj = PointOfInterest(name='Foo', address='some where', city='city', zipcode='12345', position='52.5,13.4')
+        self.assertEqual(obj.position, Geoposition(52.5, 13.4))
