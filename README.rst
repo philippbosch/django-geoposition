@@ -110,6 +110,11 @@ just a little more work. In your template make sure that
         {{ form.as_p }}
     </form>
 
+**Troubleshooting**::
+
+If the map is not displayed, try loading the jQuery libary in the <head> section of your form's HTML template. 
+If you still don't see the map ensure that you are loading the static assets properly: 
+http://localhost:8000/static/geoposition/geoposition.css
 
 Settings
 --------
