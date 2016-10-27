@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
+from decimal import Decimal
+import ast
 
 from django.db import models
+from django.utils import six
 from django.utils.six import with_metaclass
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import smart_text
@@ -27,18 +30,44 @@ class GeopositionField(models.Field):
         if isinstance(value, list):
             return Geoposition(value[0], value[1])
 
-        # default case is string
-        value_parts = value.rsplit(',')
         try:
-            latitude = value_parts[0]
-        except IndexError:
-            latitude = '0.0'
-        try:
-            longitude = value_parts[1]
-        except IndexError:
-            longitude = '0.0'
+            dict_value = ast.literal_eval(value)
+            if isinstance(dict_value, dict):
 
-        return Geoposition(latitude, longitude)
+                if 'lat' in dict_value:
+                    latitude = dict_value['lat']
+                elif 'latitude' in dict_value:
+                    latitude = dict_value['latitude']
+                else:
+                    latitude = '0.0'
+
+                if 'lng' in dict_value:
+                    longitude = dict_value['lng']
+                elif 'longitude' in dict_value:
+                    longitude = dict_value['longitude']
+                else:
+                    longitude = '0.0'
+
+                return Geoposition(latitude, longitude)
+        except:
+
+            if isinstance(value, six.text_type):
+
+                # default case is string
+                value_parts = value.rsplit(',')
+
+                try:
+                    latitude = Decimal(value_parts[0])
+                except:
+                    latitude = '0.0'
+                try:
+                    longitude = Decimal(value_parts[1])
+                except:
+                    longitude = '0.0'
+
+                return Geoposition(latitude, longitude)
+
+        return Geoposition('0.0', '0.0')
 
     def from_db_value(self, value, expression, connection, context):
         return self.to_python(value)
@@ -56,3 +85,4 @@ class GeopositionField(models.Field):
         }
         defaults.update(kwargs)
         return super(GeopositionField, self).formfield(**defaults)
+
