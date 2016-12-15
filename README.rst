@@ -102,6 +102,7 @@ just a little more work. In your template make sure that
 - the static files (JS, CSS) of the map widget are included (just use
   ``{{ form.media }}``)
 
+
 **Example**::
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
@@ -109,6 +110,23 @@ just a little more work. In your template make sure that
         {{ form.media }}
         {{ form.as_p }}
     </form>
+
+
+Only Display  the Google Map Widget
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Widget for only displaying a google map with marker, and search bar.
+- add GeopostionMapOnlyWidget in your django form
+**Example**::
+
+class LocationTwoForm(forms.ModelForm):
+
+    class Meta:
+        model = Location
+        fields = ['description', 'location']
+        required = False
+        labels = {'location': ''}
+        widgets = {'location': GeopositionMapOnlyWidget}
 
 
 Settings
