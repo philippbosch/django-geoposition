@@ -1,4 +1,5 @@
 <div class="geoposition-widget" data-map-widget-height="{{ config.map_widget_height }}" data-map-options="{{ config.map_options }}" data-marker-options="{{ config.marker_options }}">
+{% if show_coords %}
     <table>
         <tr>
             <td>{{ latitude.label|capfirst }}</td>
@@ -9,4 +10,8 @@
             <td>{{ longitude.html }}</td>
         </tr>
     </table>
+{% else %}
+{{ latitude.html }}
+{{ longitude.html }}
+{% endif %}
 </div>
