@@ -102,13 +102,49 @@ just a little more work. In your template make sure that
 - the static files (JS, CSS) of the map widget are included (just use
   ``{{ form.media }}``)
 
-**Example**::
+Example
+.......
+
+
+
+
+- In your ``myapp/templates/geoposition_example.html``::
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <form method="POST" action="">{% csrf_token %}
         {{ form.media }}
         {{ form.as_p }}
     </form>
+
+
+- In your ``myapp/views.py``::
+
+    from geoposition.forms import GeopositionField
+    from decimal import Decimal
+
+    class GMForm(forms.Form):
+        pos = GeopositionField()
+
+
+    def geoposition_example(request):
+
+        if request.method == 'POST':
+            form = GMForm(request.POST)
+            if form.is_valid():
+
+                # Form field returns a list of length 2 of Decimals:
+                coordinates = form.cleaned_data['pos'] #e.g. [Decimal(1.23), Decimal(2.34)]
+
+                # From which you can create a geoposition object, if you want to:
+                position = Geoposition(*coordinates)
+                do_my_function(position.latitude, position.longitude)
+
+                return HttpResponseRedirect(reverse('geoposition_example'))
+
+        else:
+            form = GMForm(initial={'pos':Geoposition(Decimal(45.6),Decimal(12.3))})
+
+        return render(request, 'geoposition_example.html', {'form':form})
 
 
 Settings
@@ -136,7 +172,6 @@ string in the JavaScript code and not be evaluated. Please use
 
 You can also customize the height of the displayed map widget by setting
 ``GEOPOSITION_MAP_WIDGET_HEIGHT`` to an integer value (default is 480).
-
 
 License
 -------
