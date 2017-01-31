@@ -13,11 +13,15 @@ class GeopositionField(forms.MultiValueField):
     }
 
     def __init__(self, *args, **kwargs):
-        self.widget = GeopositionWidget({'hide_coords':kwargs.pop('hide_coords', False)})
-        fields = (
+        get_address_line = kwargs.pop('get_address_line', False)
+        self.widget = GeopositionWidget({'hide_coords':kwargs.pop('hide_coords', False),
+                                         'get_address_line':get_address_line})
+        fields = [
             forms.DecimalField(label=_('latitude')),
             forms.DecimalField(label=_('longitude')),
-        )
+        ]
+        if get_address_line:
+            fields.append(forms.CharField())
         if 'initial' in kwargs:
             kwargs['initial'] = Geoposition(*kwargs['initial'].split(','))
         super(GeopositionField, self).__init__(fields, **kwargs)

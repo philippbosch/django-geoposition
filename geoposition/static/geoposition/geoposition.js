@@ -32,6 +32,7 @@ if (jQuery != undefined) {
             var $container = $(this),
                 $mapContainer = $('<div class="geoposition-map" />'),
                 $addressRow = $('<div class="geoposition-address" />'),
+                $addressRow2 = $container.find('input.geoposition:eq(2)'),
                 $searchRow = $('<div class="geoposition-search" />'),
                 $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
@@ -94,6 +95,7 @@ if (jQuery != undefined) {
                     $addressRow.text('');
                     if (results && results[0]) {
                         $addressRow.text(results[0].formatted_address);
+                        $addressRow2.val(results[0].formatted_address);
                     }
                 });
             }
