@@ -10,10 +10,17 @@ from .conf import settings
 
 class GeopositionWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
-        widgets = (
-            forms.TextInput(),
-            forms.TextInput(),
-        )
+        self.hide_coords = (attrs is not None) and isinstance(attrs, dict) and (attrs.pop('hide_coords', False))
+        if self.hide_coords:
+            widgets = (
+                forms.HiddenInput(),
+                forms.HiddenInput(),
+            )
+        else:
+            widgets = (
+                forms.TextInput(),
+                forms.TextInput(),
+            )
         super(GeopositionWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
@@ -25,6 +32,7 @@ class GeopositionWidget(forms.MultiWidget):
 
     def format_output(self, rendered_widgets):
         return render_to_string('geoposition/widgets/geoposition.html', {
+            'show_coords' : not self.hide_coords,
             'latitude': {
                 'html': rendered_widgets[0],
                 'label': _("latitude"),

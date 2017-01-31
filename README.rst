@@ -173,6 +173,9 @@ string in the JavaScript code and not be evaluated. Please use
 You can also customize the height of the displayed map widget by setting
 ``GEOPOSITION_MAP_WIDGET_HEIGHT`` to an integer value (default is 480).
 
+The geoposition.forms.GeopositionField has an optional keyword argument.
+If called as ``GeopositionField(hide_coords=True)`` then the widget will not display the Latitude and Longitude fields.
+
 License
 -------
 
