@@ -1,18 +1,10 @@
-==================
-django-geoposition
-==================
+==========================
+django-geoposition-options
+==========================
 
 A model field that can hold a geoposition (latitude/longitude), and corresponding admin/form widget.
-
-.. image:: https://badge.fury.io/py/django-geoposition.svg
-   :target: https://badge.fury.io/py/django-geoposition
-
-.. image:: https://travis-ci.org/philippbosch/django-geoposition.svg?branch=master
-   :target: https://travis-ci.org/philippbosch/django-geoposition
-
-.. image:: https://badges.gitter.im/philippbosch/django-geoposition.svg
-   :alt: Join the chat at https://gitter.im/philippbosch/django-geoposition
-   :target: https://gitter.im/philippbosch/django-geoposition?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+A fork of django-geoposition version 0.3. Added two optional parameters to the form field allowing to hide the
+lat/lon fields from the user and allowing to display and return the textual address. (See below for details)
 
 Prerequisites
 -------------
@@ -28,13 +20,13 @@ Installation
 - Use your favorite Python packaging tool to install ``geoposition``
   from `PyPI`_, e.g.::
 
-    pip install django-geoposition
+    pip install django-geoposition-options
 
 - Add ``"geoposition"`` to your ``INSTALLED_APPS`` setting::
 
     INSTALLED_APPS = (
         # …
-        "geoposition",
+        "geoposition-options",
     )
 
 - Set your Google API key in you settings file::
@@ -50,7 +42,7 @@ Installation
 Usage
 -----
 
-``django-geoposition`` comes with a model field that makes it pretty
+``django-geoposition-options`` comes with a model field that makes it pretty
 easy to add a geoposition field to one of your models. To make use of
 it:
 
@@ -154,6 +146,9 @@ You can customize the `MapOptions`_ and `MarkerOptions`_ used to initialize the
 map and marker in JavaScript by defining ``GEOPOSITION_MAP_OPTIONS`` or
 ``GEOPOSITION_MARKER_OPTIONS`` in your ``settings.py``.
 
+Display settings
+^^^^^^^^^^^^^^^^
+
 **Example**::
 
     GEOPOSITION_MAP_OPTIONS = {
@@ -173,8 +168,21 @@ string in the JavaScript code and not be evaluated. Please use
 You can also customize the height of the displayed map widget by setting
 ``GEOPOSITION_MAP_WIDGET_HEIGHT`` to an integer value (default is 480).
 
-The geoposition.forms.GeopositionField has an optional keyword argument.
-If called as ``GeopositionField(hide_coords=True)`` then the widget will not display the Latitude and Longitude fields.
+Form field options
+^^^^^^^^^^^^^^^^^^
+
+The geoposition.forms.GeopositionField has two optional keyword arguments.
+If called as ``GeopositionField(hide_coords=True)`` then the widget will not display the Latitude and Longitude fields,
+but the value of these fields will still be returned by the form.
+
+The other optional argument of ``GeopositionField`` is ``get_address_line``. If set to ``True``, then the textual
+address of the location is retrieved from GMaps, displayed on the screen and returned as a third item of the return
+value of the form field. In other words if in the above example the ``GMForm`` class is defined as:
+
+    class GMForm(forms.Form):
+        pos = GeopositionField(get_address_line=True)
+
+then ``form.cleaned_data['pos']`` is a list of 3, with the third element being the textual address.
 
 License
 -------
