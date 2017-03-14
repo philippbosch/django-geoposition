@@ -1,3 +1,10 @@
+Version 0.3.0.opt (2017-03-15)
+==============================
+Forked from 0.3.0
+
+*   Add hide_coords and get_address_line options
+
+
 Version 0.3.0 (2016-08-05)
 ==========================
 

@@ -1,5 +1,5 @@
 ==========================
-django-geoposition-options
+django-geoposition
 ==========================
 
 A model field that can hold a geoposition (latitude/longitude), and corresponding admin/form widget.
@@ -20,13 +20,13 @@ Installation
 - Use your favorite Python packaging tool to install ``geoposition``
   from `PyPI`_, e.g.::
 
-    pip install django-geoposition-options
+    pip install django-geoposition
 
 - Add ``"geoposition"`` to your ``INSTALLED_APPS`` setting::
 
     INSTALLED_APPS = (
         # …
-        "geoposition-options",
+        "geoposition",
     )
 
 - Set your Google API key in you settings file::
@@ -42,7 +42,7 @@ Installation
 Usage
 -----
 
-``django-geoposition-options`` comes with a model field that makes it pretty
+``django-geoposition`` comes with a model field that makes it pretty
 easy to add a geoposition field to one of your models. To make use of
 it:
 
