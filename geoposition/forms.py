@@ -13,6 +13,7 @@ class GeopositionField(forms.MultiValueField):
     }
 
     def __init__(self, *args, **kwargs):
+
         get_address_line = kwargs.pop('get_address_line', False)
         self.widget = GeopositionWidget({'hide_coords':kwargs.pop('hide_coords', False),
                                          'get_address_line':get_address_line})

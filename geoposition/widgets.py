@@ -10,7 +10,6 @@ from .conf import settings
 
 class GeopositionWidget(forms.MultiWidget):
     def __init__(self, attrs):
-        #self.hide_coords = (attrs is not None) and isinstance(attrs, dict) and (attrs.pop('hide_coords', False))
         self.hide_coords = attrs.pop('hide_coords')
         if self.hide_coords:
             widgets = [
@@ -37,7 +36,7 @@ class GeopositionWidget(forms.MultiWidget):
         return [None, None]
 
     def format_output(self, rendered_widgets):
-        options = {'show_coords': not self.hide_coords,
+        options = {'show_coords' : not self.hide_coords,
                     'latitude'   : {'html': rendered_widgets[0], 'label': _("latitude"), },
                     'longitude'  : {'html': rendered_widgets[1], 'label': _("longitude"), },
                     'config'     : {'map_widget_height' : settings.MAP_WIDGET_HEIGHT or 500,

@@ -63,7 +63,7 @@ if (jQuery != undefined) {
                                 map.fitBounds(result.geometry.bounds);
                             } else {
                                 map.panTo(result.geometry.location);
-                                map.setZoom(18);
+                                map.setZoom(12);
                             }
                             marker.setPosition(result.geometry.location);
                             google.maps.event.trigger(marker, 'dragend');
