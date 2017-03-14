@@ -6,7 +6,7 @@ setup(
     description='Django model field that can hold a geoposition, and corresponding admin widget. A fork of django-geoposition.',
     author='Andras Gefferth',
     author_email='',
-    url='http://github.com/philippbosch/django-geoposition',
+    url='http://github.com/kefirbandi/django-geoposition',
     packages=find_packages(),
     zip_safe=False,
     package_data={
