@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='django-geoposition',
+    name='django-geoposition-options',
     version=__import__('geoposition').__version__,
-    description='Django model field that can hold a geoposition, and corresponding admin widget.',
-    author='Philipp Bosch',
-    author_email='hello@pb.io',
-    url='http://github.com/philippbosch/django-geoposition',
+    description='Django model field that can hold a geoposition, and corresponding admin widget. A fork of django-geoposition.',
+    author='Andras Gefferth',
+    author_email='andras.gefferth@geee:)mail.com',
+    url='http://github.com/kefirbandi/django-geoposition',
     packages=find_packages(),
     zip_safe=False,
     package_data={

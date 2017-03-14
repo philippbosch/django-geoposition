@@ -7,3 +7,5 @@ MANIFEST
 *.egg
 *.sqlite3
 docs/_build/
+README.html
+.idea

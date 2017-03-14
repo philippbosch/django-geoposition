@@ -9,11 +9,23 @@ from .conf import settings
 
 
 class GeopositionWidget(forms.MultiWidget):
-    def __init__(self, attrs=None):
-        widgets = (
-            forms.TextInput(),
-            forms.TextInput(),
-        )
+    def __init__(self, attrs):
+        self.hide_coords = attrs.pop('hide_coords')
+        if self.hide_coords:
+            widgets = [
+                forms.HiddenInput(),
+                forms.HiddenInput(),
+            ]
+        else:
+            widgets = [
+                forms.TextInput(),
+                forms.TextInput(),
+            ]
+
+        self.get_address_line = attrs.pop('get_address_line')
+        if self.get_address_line:
+            widgets.append(forms.HiddenInput())
+
         super(GeopositionWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
@@ -24,21 +36,15 @@ class GeopositionWidget(forms.MultiWidget):
         return [None, None]
 
     def format_output(self, rendered_widgets):
-        return render_to_string('geoposition/widgets/geoposition.html', {
-            'latitude': {
-                'html': rendered_widgets[0],
-                'label': _("latitude"),
-            },
-            'longitude': {
-                'html': rendered_widgets[1],
-                'label': _("longitude"),
-            },
-            'config': {
-                'map_widget_height': settings.MAP_WIDGET_HEIGHT or 500,
-                'map_options': json.dumps(settings.MAP_OPTIONS),
-                'marker_options': json.dumps(settings.MARKER_OPTIONS),
-            }
-        })
+        options = {'show_coords' : not self.hide_coords,
+                    'latitude'   : {'html': rendered_widgets[0], 'label': _("latitude"), },
+                    'longitude'  : {'html': rendered_widgets[1], 'label': _("longitude"), },
+                    'config'     : {'map_widget_height' : settings.MAP_WIDGET_HEIGHT or 500,
+                                    'map_options'       : json.dumps(settings.MAP_OPTIONS),
+                                    'marker_options'    : json.dumps(settings.MARKER_OPTIONS),}}
+
+        options['address_line'] = {'html': rendered_widgets[2] if self.get_address_line else ""}
+        return render_to_string('geoposition/widgets/geoposition.html', options)
 
     class Media:
         js = (
