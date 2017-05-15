@@ -5,5 +5,5 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', 'example.views.poi_list'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 ]
