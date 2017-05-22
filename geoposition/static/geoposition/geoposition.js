@@ -28,12 +28,18 @@ if (jQuery != undefined) {
             'animation': google.maps.Animation.DROP
         };
 
-        $('.geoposition-widget').each(function() {
+        $('.geoposition-widget').each(initializeMap);
+
+        $(document).on('formset:added', function(e, inlineEl){
+            $(inlineEl).find('.geoposition-widget').each(initializeMap);
+        });
+
+        function initializeMap() {
             var $container = $(this),
-                $mapContainer = $('<div class="geoposition-map" />'),
-                $addressRow = $('<div class="geoposition-address" />'),
-                $searchRow = $('<div class="geoposition-search" />'),
-                $searchInput = $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
+                $mapContainer = $container.find('.geoposition-map').length ? $container.find('.geoposition-map') : $('<div class="geoposition-map" />'),
+                $addressRow = $container.find('.geoposition-address').length ? $container.find('.geoposition-address') : $('<div class="geoposition-address" />'),
+                $searchRow = $container.find('.geoposition-search').length ? $container.find('.geoposition-search') : $('<div class="geoposition-search" />'),
+                $searchInput = $searchRow.find('input').length ? $searchRow.find('input') : $('<input>', {'type': 'search', 'placeholder': 'Start typing an address …'}),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
                 latitude = parseFloat($latitudeField.val()) || null,
@@ -119,7 +125,11 @@ if (jQuery != undefined) {
             }).bind('abort', function() {
                 $(this).parent().find('ul.geoposition-results').remove();
             });
-            $searchInput.appendTo($searchRow);
+
+            if(!$searchRow.find('input').length) {
+                $searchInput.appendTo($searchRow);
+            }
+
             $container.append($searchRow, $mapContainer, $addressRow);
 
             mapLatLng = new google.maps.LatLng(latitude, longitude);
@@ -135,6 +145,7 @@ if (jQuery != undefined) {
             }
 
             map = new google.maps.Map($mapContainer.get(0), mapOptions);
+            $mapContainer[0].map = map;
             markerOptions = $.extend({}, markerDefaults, markerCustomOptions, {
                 'map': map
             });
@@ -142,6 +153,14 @@ if (jQuery != undefined) {
             if (!(latitude === null && longitude === null && markerOptions['position'])) {
                 markerOptions['position'] = mapLatLng;
             }
+
+            var mapElementWidth = $mapContainer[0].clientWidth;
+            setInterval(function(){
+                if(mapElementWidth !== $mapContainer[0].clientWidth) {
+                    mapElementWidth = $mapContainer[0].clientWidth;
+                    google.maps.event.trigger(map, 'resize');
+                }
+            }, 1500);
 
             marker = new google.maps.Marker(markerOptions);
             google.maps.event.addListener(marker, 'dragend', function() {
@@ -162,6 +181,6 @@ if (jQuery != undefined) {
                 marker.setPosition(center);
                 doGeocode();
             });
-        });
+        }
     });
 })(django.jQuery);
