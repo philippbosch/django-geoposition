@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from decimal import Decimal
+from decimal import Decimal, DecimalException
 
 default_app_config = 'geoposition.apps.GeoPositionConfig'
 
@@ -11,11 +11,19 @@ class Geoposition(object):
     def __init__(self, latitude, longitude):
         if isinstance(latitude, float) or isinstance(latitude, int):
             latitude = str(latitude)
+            
         if isinstance(longitude, float) or isinstance(longitude, int):
             longitude = str(longitude)
 
-        self.latitude = Decimal(latitude)
-        self.longitude = Decimal(longitude)
+        try:
+            self.latitude = Decimal(latitude)
+        except DecimalException:
+            self.latitude = '0.0'
+
+        try:
+            self.longitude = Decimal(longitude)
+        except DecimalException:
+            self.longitude = '0.0'
 
     def __str__(self):
         return "%s,%s" % (self.latitude, self.longitude)
