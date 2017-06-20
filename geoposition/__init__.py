@@ -11,8 +11,13 @@ class Geoposition(object):
     def __init__(self, latitude, longitude):
         if isinstance(latitude, float) or isinstance(latitude, int):
             latitude = str(latitude)
+        else:
+            latitude = ''.join(i for i in latitude if i.isdigit())
+            
         if isinstance(longitude, float) or isinstance(longitude, int):
             longitude = str(longitude)
+        else:
+            longitude = ''.join(i for i in longitude if i.isdigit())
 
         self.latitude = Decimal(latitude)
         self.longitude = Decimal(longitude)
