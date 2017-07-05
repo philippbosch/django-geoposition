@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 from .conf import settings
-
+from . import app_settings
 
 class GeopositionWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
@@ -45,6 +45,11 @@ class GeopositionWidget(forms.MultiWidget):
             '//maps.google.com/maps/api/js?key=%s' % settings.GOOGLE_MAPS_API_KEY,
             'geoposition/geoposition.js',
         )
+        if app_settings.GEOPOSITION_GMAP_URL_AUTOLOAD:
+            if app_settings.GEOPOSITION_GMAP_URL:
+                js += (
+                    app_settings.GEOPOSITION_GMAP_URL
+                )
         css = {
             'all': ('geoposition/geoposition.css',)
         }
