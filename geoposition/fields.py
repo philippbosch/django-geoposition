@@ -9,7 +9,7 @@ from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
 
 
-class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
+class GeopositionField(models.Field):
     description = _("A geoposition (latitude and longitude)")
 
     def __init__(self, *args, **kwargs):
@@ -39,6 +39,9 @@ class GeopositionField(with_metaclass(models.SubfieldBase, models.Field)):
             longitude = '0.0'
 
         return Geoposition(latitude, longitude)
+
+    def from_db_value(self, value, expression, connection, context):
+        return self.to_python(value)
 
     def get_prep_value(self, value):
         return str(value)

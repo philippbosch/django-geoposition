@@ -46,9 +46,9 @@ if (jQuery != undefined) {
                 markerCustomOptions,
                 marker;
 
-            $mapContainer.css('height', $container.data('map-widget-height') + 'px');
-            mapCustomOptions = $container.data('map-options') || {};
-            markerCustomOptions = $container.data('marker-options') || {};
+            $mapContainer.css('height', $container.attr('data-map-widget-height') + 'px');
+            mapCustomOptions = JSON.parse($container.attr('data-map-options'));
+            markerCustomOptions = JSON.parse($container.attr('data-marker-options'));
 
             function doSearch() {
                 var gc = new google.maps.Geocoder();
@@ -74,7 +74,7 @@ if (jQuery != undefined) {
                             $.each(results, function(i, result) {
                                 var $li = $('<li />');
                                 $li.text(result.formatted_address);
-                                $li.on('click', function() {
+                                $li.bind('click', function() {
                                     updatePosition(result);
                                     $li.closest('ul').remove();
                                 });
@@ -99,7 +99,7 @@ if (jQuery != undefined) {
             }
 
             var autoSuggestTimer = null;
-            $searchInput.on('keydown', function(e) {
+            $searchInput.bind('keydown', function(e) {
                 if (autoSuggestTimer) {
                     clearTimeout(autoSuggestTimer);
                     autoSuggestTimer = null;
@@ -116,7 +116,7 @@ if (jQuery != undefined) {
                         doSearch();
                     }, 1000);
                 }
-            }).on('abort', function() {
+            }).bind('abort', function() {
                 $(this).parent().find('ul.geoposition-results').remove();
             });
             $searchInput.appendTo($searchRow);
@@ -169,6 +169,7 @@ if (jQuery != undefined) {
 	    
 	    function updateMarkerPos(){
 		var latitude = parseFloat($latitudeField.val()) || 0;
+
                 var longitude = parseFloat($longitudeField.val()) || 0;
                 var center = new google.maps.LatLng(latitude, longitude);
                 marker.setPosition(center);

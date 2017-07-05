@@ -4,18 +4,22 @@ django-geoposition
 
 A model field that can hold a geoposition (latitude/longitude), and corresponding admin/form widget.
 
-.. image:: https://pypip.in/v/django-geoposition/badge.png
-   :target: https://pypi.python.org/pypi/django-geoposition
+.. image:: https://badge.fury.io/py/django-geoposition.svg
+   :target: https://badge.fury.io/py/django-geoposition
 
-.. image:: https://travis-ci.org/philippbosch/django-geoposition.png?branch=master
+.. image:: https://travis-ci.org/philippbosch/django-geoposition.svg?branch=master
    :target: https://travis-ci.org/philippbosch/django-geoposition
 
+.. image:: https://badges.gitter.im/philippbosch/django-geoposition.svg
+   :alt: Join the chat at https://gitter.im/philippbosch/django-geoposition
+   :target: https://gitter.im/philippbosch/django-geoposition?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 Prerequisites
 -------------
 
-Starting with version 0.2, django-geoposition requires Django 1.4.10 or greater. If you need to support
-Django versions prior to 1.4.10, please use django-geoposition 0.1.5.
+Starting with version 0.3, django-geoposition requires Django 1.8 or greater.
+If you need to support Django versions prior to 1.8 please use django-geoposition 0.2.3.
+For Django versions prior to 1.4.10 please use django-geoposition 0.1.5.
 
 
 Installation
@@ -32,6 +36,12 @@ Installation
         # …
         "geoposition",
     )
+
+- Set your Google API key in you settings file::
+
+    GEOPOSITION_GOOGLE_MAPS_API_KEY = 'YOUR_API_KEY'
+
+  API keys may be obtained here: https://developers.google.com/maps/documentation/javascript/get-api-key
 
 - If you are still using Django <1.3, you are advised to install
   `django-staticfiles`_ for static file serving.

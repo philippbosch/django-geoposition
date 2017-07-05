@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
-
 from decimal import Decimal
 
-VERSION = (0, 2, 2)
+default_app_config = 'geoposition.apps.GeoPositionConfig'
+
+VERSION = (0, 3, 0)
 __version__ = '.'.join(map(str, VERSION))
 
 

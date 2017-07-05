@@ -1,10 +1,10 @@
 from decimal import Decimal
-from django.test import SimpleTestCase
+from django.test import TestCase
 from geoposition import Geoposition
 from example.models import PointOfInterest
 
 
-class GeopositionTestCase(SimpleTestCase):
+class GeopositionTestCase(TestCase):
     def test_init_with_decimals(self):
         gp = Geoposition(Decimal('52.5'), Decimal('13.4'))
         self.assertEqual(gp.latitude, Decimal('52.5'))
@@ -49,6 +49,6 @@ class GeopositionTestCase(SimpleTestCase):
         self.assertTrue(gp1 != gp2)
 
     def test_db_value_to_python_object(self):
-        obj = PointOfInterest.objects.create(name='Foo', address='some where', city='city', zipcode='12345', position=Geoposition(52.5,13.4))
+        obj = PointOfInterest.objects.create(name='Foo', address='some where', city='city', zipcode='12345', position=Geoposition(52.5, 13.4))
         poi = PointOfInterest.objects.get(id=obj.id)
         self.assertIsInstance(poi.position, Geoposition)

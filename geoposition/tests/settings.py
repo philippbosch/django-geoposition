@@ -1,4 +1,5 @@
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = '+*mac$-+vop%1#8zp%)blgacvst%fm)p$&u#p!5(x5nv9c0955'
@@ -47,3 +48,4 @@ STATIC_URL = '/static/'
 
 
 GEOPOSITION_MAP_WIDGET_HEIGHT = 500
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'DUMMY'
