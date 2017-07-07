@@ -1,8 +1,8 @@
-if (jQuery != undefined) {
-    var django = {
-        'jQuery': jQuery,
-    }
-}
+//if (jQuery != undefined) {
+    //var django = {
+        //'jQuery': jQuery,
+    //}
+//}
 
 
 (function($) {
