@@ -1,5 +1,5 @@
 if (jQuery != undefined) {
-    var django = {
+    var djangoGeoposition = {
         'jQuery': jQuery,
     }
 }
@@ -164,4 +164,4 @@ if (jQuery != undefined) {
             });
         });
     });
-})(django.jQuery);
+})(djangoGeoposition.jQuery);
