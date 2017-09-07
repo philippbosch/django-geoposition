@@ -2,11 +2,23 @@
     <table>
         <tr>
             <td>{{ latitude.label|capfirst }}</td>
-            <td>{{ latitude.html }}</td>
+            <td>
+                {% if latitude.widget %}
+                    {% include latitude.widget.template_name with widget=latitude.widget %}
+                {% else %}
+                    {{ latitude.html }}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <td>{{ longitude.label|capfirst }}</td>
-            <td>{{ longitude.html }}</td>
+            <td>
+                {% if longitude.widget %}
+                    {% include longitude.widget.template_name with widget=longitude.widget %}
+                {% else %}
+                    {{ longitude.html }}
+                {% endif %}
+            </td>
         </tr>
     </table>
 </div>
