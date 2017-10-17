@@ -34,7 +34,6 @@ class GeopositionWidget(forms.MultiWidget):
             'marker_options': json.dumps(settings.MARKER_OPTIONS),
         }
 
-
     def get_context(self, name, value, attrs):
         # Django 1.11 and up
         context = super(GeopositionWidget, self).get_context(name, value, attrs)

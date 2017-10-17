@@ -1,7 +1,7 @@
 if (jQuery != undefined) {
     var django = {
-        'jQuery': jQuery,
-    }
+        'jQuery': jQuery
+    };
 }
 
 
@@ -10,7 +10,7 @@ if (jQuery != undefined) {
     $(document).ready(function() {
 
         try {
-            var _ = google;
+            var _ = google; // eslint-disable-line no-unused-vars
         } catch (ReferenceError) {
             console.log('geoposition: "google" not defined.  You might not be connected to the internet.');
             return;
@@ -90,7 +90,7 @@ if (jQuery != undefined) {
                 var gc = new google.maps.Geocoder();
                 gc.geocode({
                     'latLng': marker.position
-                }, function(results, status) {
+                }, function(results) {
                     $addressRow.text('');
                     if (results && results[0]) {
                         $addressRow.text(results[0].formatted_address);
@@ -109,10 +109,9 @@ if (jQuery != undefined) {
                 if (e.keyCode == 13) {
                     e.preventDefault();
                     doSearch();
-                }
-                else {
+                } else {
                     // otherwise, search after a while after typing ends
-                    autoSuggestTimer = setTimeout(function(){
+                    autoSuggestTimer = setTimeout(function() {
                         doSearch();
                     }, 1000);
                 }
@@ -153,7 +152,7 @@ if (jQuery != undefined) {
                 google.maps.event.trigger(marker, 'dragend');
             }
 
-            $latitudeField.add($longitudeField).bind('keyup', function(e) {
+            $latitudeField.add($longitudeField).bind('keyup', function() {
                 var latitude = parseFloat($latitudeField.val()) || 0;
                 var longitude = parseFloat($longitudeField.val()) || 0;
                 var center = new google.maps.LatLng(latitude, longitude);
