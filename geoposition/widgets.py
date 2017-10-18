@@ -14,6 +14,20 @@ class GeopositionWidget(forms.MultiWidget):
     template_name = 'geoposition/widgets/geoposition.html'
 
     def __init__(self, attrs=None):
+        if settings.BACKEND == 'google':
+            self.Media.js = (
+                '//maps.google.com/maps/api/js?key=%s' % settings.GOOGLE_MAPS_API_KEY,
+                'geoposition/google.js',
+            )
+        elif settings.BACKEND == 'leaflet':
+            self.Media.js = (
+                # '//unpkg.com/leaflet@1.2.0/dist/leaflet.js',
+                '//unpkg.com/leaflet@1.2.0/dist/leaflet-src.js',
+                # '//unpkg.com/leaflet-providers@1.1.17/leaflet-providers.js',
+                'geoposition/leaflet.js',
+            )
+            self.Media.css['all'].insert(0, '//unpkg.com/leaflet@1.2.0/dist/leaflet.css')
+
         widgets = (
             forms.TextInput(),
             forms.TextInput(),
@@ -63,10 +77,6 @@ class GeopositionWidget(forms.MultiWidget):
         })
 
     class Media:
-        js = (
-            '//maps.google.com/maps/api/js?key=%s' % settings.GOOGLE_MAPS_API_KEY,
-            'geoposition/geoposition.js',
-        )
         css = {
-            'all': ('geoposition/geoposition.css',)
+            'all': ['geoposition/geoposition.css']
         }

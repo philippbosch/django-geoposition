@@ -11,7 +11,8 @@ class AppSettings(object):
         'GOOGLE_MAPS_API_KEY': None,
     }
     prefix = 'GEOPOSITION'
-    required_settings = ['GOOGLE_MAPS_API_KEY']
+    # required_settings = ['GOOGLE_MAPS_API_KEY']
+    required_settings = []
 
     def __init__(self, django_settings):
         self.django_settings = django_settings

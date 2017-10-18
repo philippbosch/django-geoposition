@@ -8,6 +8,7 @@
 
     "globals": {
         "google": true,
+        "L": true,
     },
 
     "rules": {
