@@ -23,6 +23,8 @@ if (jQuery != undefined) {
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
                 latitude = parseFloat($latitudeField.val()) || null,
                 longitude = parseFloat($longitudeField.val()) || null,
+                mapDefaultCenter = [25, 0],
+                mapDefaultZoom = 2,
                 map,
                 marker;
 
@@ -36,7 +38,7 @@ if (jQuery != undefined) {
             function getLatLng() {
                 latitude = parseFloat($latitudeField.val()) || null;
                 longitude = parseFloat($longitudeField.val()) || null;
-                return {'lat': latitude, 'lng': longitude};
+                return {lat: latitude, lng: longitude};
             }
 
             function mapClickListen(e) {
@@ -58,17 +60,26 @@ if (jQuery != undefined) {
 
             // create the map
             $container.append($mapContainer);
-            map = L.map($mapContainer[0]).setView([51.505, -0.09], 13);
+            map = L.map($mapContainer[0]).setView(mapDefaultCenter, mapDefaultZoom);
             L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
                 maxZoom: 18,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             map.on('click', mapClickListen);
 
+            // add a search bar
+            L.Control.geocoder({
+                collapsed: false,
+                defaultMarkGeocode: false
+                // geocoder: L.Control.Geocoder.photon()
+            }).on('markgeocode', function(e) {
+                setMarker(e.geocode.center);
+            }).addTo(map);
+
             // set marker if model has data already
             if ($latitudeField.val() && $longitudeField.val()) {
                 setMarker(getLatLng());
-                map.panTo(getLatLng(), {'animate': false});
+                map.panTo(getLatLng(), {animate: false});
             }
 
             // listen to keyboard input
