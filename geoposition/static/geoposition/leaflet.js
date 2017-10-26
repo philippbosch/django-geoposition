@@ -23,12 +23,28 @@ if (jQuery != undefined) {
                 $longitudeField = $container.find('input.geoposition:eq(1)'),
                 latitude = parseFloat($latitudeField.val()) || null,
                 longitude = parseFloat($longitudeField.val()) || null,
-                mapDefaultCenter = [25, 0],
-                mapDefaultZoom = 2,
+                mapOptions = {
+                    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    maxZoom: 19,
+                    dataZoom: 16,
+                    initialZoom: 2,
+                    initialCenter: [25, 0]
+                },
+                mapNonProviderOptions = ['url', 'dataZoom', 'initialZoom', 'initialCenter'],
+                mapProviderOptions = {},
+                mapCustomOptions,
                 map,
                 marker;
 
             $mapContainer.css('height', $container.attr('data-map-widget-height') + 'px');
+            mapCustomOptions = JSON.parse($container.attr('data-map-options'));
+            $.extend(mapOptions, mapCustomOptions);
+
+            for (var option in mapOptions) {
+                if (mapNonProviderOptions.includes(option) === false)
+                    mapProviderOptions[option] = mapOptions[option];
+            }
 
             function setLatLng(latLng) {
                 $latitudeField.val(latLng.lat);
@@ -53,7 +69,7 @@ if (jQuery != undefined) {
                     map.panTo(e.target.getLatLng());
                 });
                 marker.addTo(map);
-                map.panTo(latLng);
+                map.setView(latLng, mapOptions.dataZoom);
                 setLatLng(latLng);
                 // only one single marker allowed
                 map.off('click', mapClickListen);
@@ -61,18 +77,14 @@ if (jQuery != undefined) {
 
             // create the map
             $container.append($mapContainer);
-            map = L.map($mapContainer[0]).setView(mapDefaultCenter, mapDefaultZoom);
-            L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
+            map = L.map($mapContainer[0]).setView(mapOptions.initialCenter, mapOptions.initialZoom);
+            L.tileLayer(mapOptions.url, mapProviderOptions).addTo(map);
             map.on('click', mapClickListen);
 
             // add a search bar
             L.Control.geocoder({
                 collapsed: false,
                 defaultMarkGeocode: false
-                // geocoder: L.Control.Geocoder.photon()
             }).on('markgeocode', function(e) {
                 setMarker(e.geocode.center);
             }).addTo(map);
@@ -80,14 +92,12 @@ if (jQuery != undefined) {
             // set marker if model has data already
             if ($latitudeField.val() && $longitudeField.val()) {
                 setMarker(getLatLng());
-                map.panTo(getLatLng(), {animate: false});
+                map.setView(getLatLng(), mapOptions.dataZoom, {animate: false});
             }
 
             // listen to keyboard input
             $latitudeField.add($longitudeField).bind('keyup', function() {
-                var latLng = getLatLng();
-                map.panTo(latLng);
-                marker.setLatLng(latLng);
+                setMarker(getLatLng());
             });
         });
     });
