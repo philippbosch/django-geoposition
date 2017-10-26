@@ -46,6 +46,7 @@ if (jQuery != undefined) {
             }
 
             function setMarker(latLng) {
+                if (marker) marker.remove();
                 marker = L.marker(latLng, {draggable: true});
                 marker.on('dragend', function(e) {
                     setLatLng(e.target.getLatLng());
