@@ -23,13 +23,13 @@ class GeopositionWidget(forms.MultiWidget):
         },
         'leaflet': {
             'js': (
-                '//unpkg.com/leaflet@1.0.0/dist/leaflet.js',
-                '//unpkg.com/leaflet-control-geocoder@1.5.5/dist/Control.Geocoder.js',
+                '//unpkg.com/leaflet@1.2.0/dist/leaflet.js',
+                '//unpkg.com/leaflet-control-geocoder@1.5.6/dist/Control.Geocoder.js',
                 'geoposition/leaflet.js',
             ),
             'css': (
-                '//unpkg.com/leaflet@1.0.0/dist/leaflet.css',
-                '//unpkg.com/leaflet-control-geocoder@1.5.5/dist/Control.Geocoder.css',
+                '//unpkg.com/leaflet@1.2.0/dist/leaflet.css',
+                '//unpkg.com/leaflet-control-geocoder@1.5.6/dist/Control.Geocoder.css',
             ),
         }
     }
