@@ -47,8 +47,7 @@ class GeopositionField(models.Field):
         return str(value)
 
     def value_to_string(self, obj):
-        value = self._get_val_from_obj(obj)
-        return smart_text(value)
+        return smart_text(obj.location)
 
     def formfield(self, **kwargs):
         defaults = {
