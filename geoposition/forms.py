@@ -19,7 +19,7 @@ class GeopositionField(forms.MultiValueField):
             forms.DecimalField(label=_('longitude')),
         )
         if 'initial' in kwargs:
-            kwargs['initial'] = Geoposition(*kwargs['initial'].latitude, *kwargs['initial'].longitude)
+            kwargs['initial'] = Geoposition(0, 0)
         super(GeopositionField, self).__init__(fields, **kwargs)
 
     def widget_attrs(self, widget):
