@@ -2,6 +2,9 @@
 django-geoposition
 ==================
 
+This fork is designed to use with Django2 + Django REST framework.
+It has just single change underneath
+
 A model field that can hold a geoposition (latitude/longitude), and corresponding admin/form widget.
 
 .. image:: https://badge.fury.io/py/django-geoposition.svg
