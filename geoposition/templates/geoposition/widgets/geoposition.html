@@ -1,12 +1,12 @@
-<div class="geoposition-widget" data-map-widget-height="{{ config.map_widget_height }}" data-map-options="{{ config.map_options }}" data-marker-options="{{ config.marker_options }}">
+<div class="geoposition-widget" data-map-widget-height="{{ widget.config.map_widget_height }}" data-map-options="{{ widget.config.map_options }}" data-marker-options="{{ widget.config.marker_options }}">
     <table>
         <tr>
-            <td>{{ latitude.label|capfirst }}</td>
-            <td>{{ latitude.html }}</td>
+            <td>{{ widget.latitude.label|capfirst }}</td>
+            <td>{{ widget.latitude.html }}</td>
         </tr>
         <tr>
-            <td>{{ longitude.label|capfirst }}</td>
-            <td>{{ longitude.html }}</td>
+            <td>{{ widget.longitude.label|capfirst }}</td>
+            <td>{{ widget.longitude.html }}</td>
         </tr>
     </table>
 </div>
