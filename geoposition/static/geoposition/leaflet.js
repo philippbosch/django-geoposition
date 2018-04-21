@@ -99,6 +99,11 @@ if (jQuery != undefined) {
             $latitudeField.add($longitudeField).bind('keyup', function() {
                 setMarker(getLatLng());
             });
+            
+            // refresh map if inside jquery ui tabs widget and active tab changed
+            $container.parents('#tabs').on('tabsactivate', function() {
+                map.invalidateSize();
+            });
         });
     });
 })(django.jQuery);
