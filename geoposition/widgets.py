@@ -2,13 +2,14 @@ from __future__ import unicode_literals
 
 import json
 from django import forms
-from django.template.loader import render_to_string
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 from .conf import settings
 
 
 class GeopositionWidget(forms.MultiWidget):
+    template_name = 'geoposition/widgets/geoposition.html'
+
     def __init__(self, attrs=None):
         widgets = (
             forms.TextInput(),
@@ -16,21 +17,17 @@ class GeopositionWidget(forms.MultiWidget):
         )
         super(GeopositionWidget, self).__init__(widgets, attrs)
 
-    def decompress(self, value):
-        if isinstance(value, six.text_type):
-            return value.rsplit(',')
-        if value:
-            return [value.latitude, value.longitude]
-        return [None, None]
-
-    def format_output(self, rendered_widgets):
-        return render_to_string('geoposition/widgets/geoposition.html', {
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        if not isinstance(value, list):
+            value = self.decompress(value)
+        context['widget'] = {
             'latitude': {
-                'html': rendered_widgets[0],
+                'html': value[0],
                 'label': _("latitude"),
             },
             'longitude': {
-                'html': rendered_widgets[1],
+                'html': value[1],
                 'label': _("longitude"),
             },
             'config': {
@@ -38,7 +35,15 @@ class GeopositionWidget(forms.MultiWidget):
                 'map_options': json.dumps(settings.MAP_OPTIONS),
                 'marker_options': json.dumps(settings.MARKER_OPTIONS),
             }
-        })
+        }
+        return context
+
+    def decompress(self, value):
+        if isinstance(value, six.text_type):
+            return value.rsplit(',')
+        if value:
+            return [value.latitude, value.longitude]
+        return [None, None]
 
     class Media:
         js = (

@@ -1,5 +1,5 @@
 .geoposition-widget {
-    overflow: hidden;
+    width: 100%;
 }
 
 .geoposition-map {
@@ -8,21 +8,10 @@
     clear: both;
 }
 
-.geoposition-widget table {
-    float: left;
-    border: 0;
-    margin-bottom: 8px;
-}
-
-.geoposition-widget td {
-    border: 0;
-    padding: 0;
-    padding-right: 5px;
-    vertical-align: middle;
-}
-
 .geoposition-search {
     width: 30%;
+    float: right;
+    padding-right: 15px;
 }
 
 .geoposition-search input {
@@ -30,13 +19,8 @@
 }
 
 .geoposition-address {
-    float: left;
-    text-align: left;
-}
-
-.geoposition-search {
-    float: right;
-    text-align: left;
+    line-height: 200%;
+    text-decoration: underline;
 }
 
 .geoposition-results {
