@@ -19,8 +19,6 @@ class GeopositionField(models.Field):
         return 'CharField'
 
     def to_python(self, value):
-        print('ho')
-        print(value)
         if not value or value == 'None':
             return None
         if isinstance(value, Geoposition):
@@ -42,18 +40,12 @@ class GeopositionField(models.Field):
         return Geoposition(latitude, longitude)
 
     def from_db_value(self, value, expression, connection, context):
-        print('db value')
-        print(value)
         return self.to_python(value)
 
     def get_prep_value(self, value):
-        print('prep')
-        print(value)
         return str(value)
 
     def value_to_string(self, obj):
-        print('obj')
-        print(obj)
         value = self.value_from_object(obj)
         return smart_text(value)
 

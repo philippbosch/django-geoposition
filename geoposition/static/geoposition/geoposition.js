@@ -46,6 +46,9 @@ if (jQuery != undefined) {
                 markerCustomOptions,
                 marker;
 
+            console.log('latitude');
+            console.log($latitudeField.val());
+
             $mapContainer.css('height', $container.attr('data-map-widget-height') + 'px');
             mapCustomOptions = JSON.parse($container.attr('data-map-options'));
             markerCustomOptions = JSON.parse($container.attr('data-marker-options'));

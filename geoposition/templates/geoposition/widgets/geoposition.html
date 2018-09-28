@@ -1,19 +1,8 @@
-{#<div class="geoposition-widget" data-map-widget-height="{{ config.map_widget_height }}" data-map-options="{{ config.map_options }}" data-marker-options="{{ config.marker_options }}">#}
-{#    <table>#}
-{#        <tr>#}
-{#            <td>{{ latitude.label|capfirst }}</td>#}
-{#            <td>{{ latitude.html }}</td>#}
-{#        </tr>#}
-{#        <tr>#}
-{#            <td>{{ longitude.label|capfirst }}</td>#}
-{#            <td>{{ longitude.html }}</td>#}
-{#        </tr>#}
-{#    </table>#}
-{#</div>#}
+{% load l10n %}
 <div class="geoposition-widget" data-map-widget-height="{{ widget.config.map_widget_height }}" data-map-options='{{ widget.config.map_options }}' data-marker-options='{{ widget.config.marker_options }}'>
     {{ widget.latitude.label|capfirst }}:
-    <input type="text" name="position_0" class="geoposition" value="{{ widget.latitude.html }}" />
+    <input type="text" name="position_0" class="geoposition" value="{{ widget.latitude.html|unlocalize }}" />
     {{ widget.longitude.label|capfirst }}:
-    <input type="text" name="position_1" class="geoposition" value="{{ widget.longitude.html }}" />
+    <input type="text" name="position_1" class="geoposition" value="{{ widget.longitude.html|unlocalize }}" />
     <br/>
 </div>
