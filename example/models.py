@@ -1,5 +1,4 @@
 from django.db import models
-
 from geoposition.fields import GeopositionField
 
 
@@ -12,4 +11,3 @@ class PointOfInterest(models.Model):
 
     class Meta:
         verbose_name_plural = 'points of interest'
-
