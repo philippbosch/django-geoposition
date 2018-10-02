@@ -65,10 +65,11 @@ it:
 
 - This enables the following simple API::
 
+    >>> from geoposition import Geoposition
     >>> from myapp.models import PointOfInterest
-    >>> poi = PointOfInterest.objects.get(id=1)
+    >>> poi = PointOfInterest.objects.create(name='Foo', position=Geoposition(52.522906, 13.41156))
     >>> poi.position
-    Geoposition(52.522906,13.41156)
+    Geoposition(52.522906, 13.41156)
     >>> poi.position.latitude
     52.522906
     >>> poi.position.longitude
