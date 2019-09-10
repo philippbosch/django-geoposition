@@ -1,0 +1,35 @@
+{
+    "extends": "eslint:recommended",
+
+    "env": {
+        "browser": true,
+        "jquery": true,
+    },
+
+    "globals": {
+        "google": true,
+        "L": true,
+    },
+
+    "rules": {
+        "quotes": ["warn", "single"],
+        "semi": ["warn", "always"],
+        "comma-dangle": ["warn", "never"],
+
+        "object-curly-spacing": "warn",
+        "block-spacing": "warn",
+
+        "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+        "key-spacing": "warn",
+        "keyword-spacing": "warn",
+        "space-before-blocks": "warn",
+        "func-call-spacing": "warn",
+
+        "no-tabs": "warn",
+        "no-trailing-spaces": "warn",
+        "eol-last": "warn",
+
+        "eqeqeq": "off",
+        "no-console": "off",
+    },
+}
