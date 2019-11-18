@@ -7,7 +7,6 @@ from django.utils.encoding import smart_unicode
 
 class GeopositionField(models.Field):
     description = "A geoposition (latitude and longitude)"
-    __metaclass__ = models.SubfieldBase
     
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 42
@@ -35,6 +34,9 @@ class GeopositionField(models.Field):
             return None
         
         return Geoposition(latitude, longitude)
+
+    def from_db_value(self, value, expression, connection, context):
+        return self.to_python(value)
     
     def get_prep_value(self, value):
         return unicode(value)
