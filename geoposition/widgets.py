@@ -3,7 +3,10 @@ from __future__ import unicode_literals
 import json
 from django import forms
 from django.template.loader import render_to_string
-from django.utils import six
+try:
+    from django.utils import six
+except:
+    import six
 from django.utils.translation import ugettext_lazy as _
 from .conf import settings
 
