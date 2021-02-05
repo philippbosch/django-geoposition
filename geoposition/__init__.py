@@ -42,7 +42,7 @@ class Geoposition(object):
     @property
     def long(self):
         return self._longitude
-    @int.setter
+    @long.setter
     def long(self, value):
         self.longitude = value
 
