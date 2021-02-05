@@ -50,7 +50,7 @@ class Geoposition(object):
         return "%s,%s" % (self._latitude, self._longitude)
     
     def __repr__(self):
-        return "Geoposition(%s)" % six.text_type(self)
+        return "Geoposition(%s)" % self.__unicode__()
     
     def __len__(self):
         return len(six.text_type(self))
