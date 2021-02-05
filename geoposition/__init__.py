@@ -1,4 +1,7 @@
+from __future__ import absolute_import
 from decimal import Decimal
+from six.moves import map
+import six
 
 VERSION = (0, 1, 4)
 __version__ = '.'.join(map(str, VERSION))
@@ -39,7 +42,7 @@ class Geoposition(object):
     @property
     def long(self):
         return self._longitude
-    @long.setter
+    @int.setter
     def long(self, value):
         self.longitude = value
 
@@ -47,10 +50,10 @@ class Geoposition(object):
         return "%s,%s" % (self._latitude, self._longitude)
     
     def __repr__(self):
-        return "Geoposition(%s)" % unicode(self)
+        return "Geoposition(%s)" % six.text_type(self)
     
     def __len__(self):
-        return len(unicode(self))
+        return len(six.text_type(self))
 
     def __iter__(self):
         yield self._latitude
