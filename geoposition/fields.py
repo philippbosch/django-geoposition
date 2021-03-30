@@ -4,6 +4,7 @@ from django.db import models
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
 from django.utils.encoding import smart_text
+import decimal
 import six
 
 
@@ -35,7 +36,10 @@ class GeopositionField(models.Field):
         except IndexError:
             return None
         
-        return Geoposition(latitude, longitude)
+        try:
+            return Geoposition(latitude, longitude)
+        except decimal.InvalidOperation:
+            return None
 
     def from_db_value(self, value, expression, connection, context):
         return self.to_python(value)

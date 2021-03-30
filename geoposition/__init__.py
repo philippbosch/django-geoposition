@@ -48,6 +48,9 @@ class Geoposition(object):
 
     def __unicode__(self):
         return "%s,%s" % (self._latitude, self._longitude)
+
+    def __str__(self):
+        return self.__unicode__()
     
     def __repr__(self):
         return "Geoposition(%s)" % self.__unicode__()
