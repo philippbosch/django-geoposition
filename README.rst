@@ -34,7 +34,7 @@ Installation
 
     INSTALLED_APPS = (
         # …
-        "geoposition",
+        "geoposition.apps.GeoPositionConfig",
     )
 
 - Set your Google API key in you settings file::
