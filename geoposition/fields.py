@@ -41,7 +41,7 @@ class GeopositionField(models.Field):
         except decimal.InvalidOperation:
             return None
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection, context=None):
         return self.to_python(value)
     
     def get_prep_value(self, value):
