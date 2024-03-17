@@ -5,8 +5,8 @@ try:
     from django.utils.six import with_metaclass
 except:
     from six import with_metaclass
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import smart_text
+from django.utils.translation import gettext_lazy as _
+from django.utils.encoding import smart_str
 
 from . import Geoposition
 from .forms import GeopositionField as GeopositionFormField
@@ -51,7 +51,7 @@ class GeopositionField(models.Field):
 
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
-        return smart_text(value)
+        return smart_str(value)
 
     def formfield(self, **kwargs):
         defaults = {
